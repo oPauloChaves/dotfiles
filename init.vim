@@ -93,11 +93,6 @@ Plug 'gorodinskiy/vim-coloresque'
 Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
 
-
-" javascript
-"" Javascript Bundle
-" Plug 'jelera/vim-javascript-syntax'
-
 " javascript
 "" Javascript Bundle
 Plug 'othree/yajs'
@@ -402,15 +397,6 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 let g:UltiSnipsEditSplit="vertical"
 
-" syntastic
-" let g:syntastic_always_populate_loc_list=1
-" let g:syntastic_error_symbol='✗'
-" let g:syntastic_warning_symbol='⚠'
-" let g:syntastic_style_error_symbol = '✗'
-" let g:syntastic_style_warning_symbol = '⚠'
-" let g:syntastic_auto_loc_list=1
-" let g:syntastic_aggregate_errors = 1
-
 " Ale
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_sign_column_always = 1
@@ -512,8 +498,6 @@ endfunction
 
 let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
-" let g:syntastic_go_checkers = ['golint', 'govet']
-" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
@@ -623,3 +607,7 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
+
+" Map autocomplete to Ctrl+Space
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-Space>
