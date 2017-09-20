@@ -351,10 +351,15 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚠'
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'elixir': [],
-\}
+let g:ale_fix_on_save = 1
+
+let g:ale_linters = {}
+let g:ale_linters['javascript'] = ['eslint']
+let g:ale_linters['elixir'] = []
+
+" doesn't consider prettier config file
+" let g:ale_fixers = {}
+" let g:ale_fixers['javascript'] = ['prettier']
 
 " **************************************************
 "" Deoplete and tern config
@@ -586,11 +591,7 @@ inoremap <C-@> <C-Space>
 let g:neoformat_try_formatprg = 1
 
 augroup NeoformatAutoFormat
-    autocmd!
-    autocmd FileType javascript setlocal formatprg=prettier
-"                                            \--stdin\
-"                                            \--print-width\ 100\
-"                                            \--single-quote\
-"                                            \--trailing-comma\ es5
-    autocmd BufWritePre *.js Neoformat
+  autocmd!
+  autocmd FileType javascript setlocal formatprg=prettier
+  autocmd BufWritePre *.js,*.css,*.scss,*.json Neoformat
 augroup END
