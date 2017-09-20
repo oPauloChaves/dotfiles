@@ -47,6 +47,7 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
 Plug 'sheerun/vim-polyglot'
+Plug 'sbdchd/neoformat'
 
 let g:make = 'gmake'
 if exists('make')
@@ -579,3 +580,17 @@ augroup END
 " Map autocomplete to Ctrl+Space
 inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-Space>
+
+" ************************************************************************
+" neoformat
+let g:neoformat_try_formatprg = 1
+
+augroup NeoformatAutoFormat
+    autocmd!
+    autocmd FileType javascript setlocal formatprg=prettier
+"                                            \--stdin\
+"                                            \--print-width\ 100\
+"                                            \--single-quote\
+"                                            \--trailing-comma\ es5
+    autocmd BufWritePre *.js Neoformat
+augroup END
