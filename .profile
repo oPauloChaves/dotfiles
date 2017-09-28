@@ -14,3 +14,7 @@ if [ -d "$HOME/go" ]; then
 	GOPATH="$HOME/go"
 	PATH="$GOPATH/bin:$PATH"
 fi
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
