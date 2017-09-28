@@ -595,3 +595,11 @@ augroup NeoformatAutoFormat
   autocmd FileType javascript setlocal formatprg=prettier
   autocmd BufWritePre *.js,*.css,*.scss,*.json Neoformat
 augroup END
+
+" *************************************************************************
+" Emmet
+let g:user_emmet_settings = {
+\  'javascript.jsx' : {
+\      'extends' : 'jsx',
+\  },
+\}
