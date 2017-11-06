@@ -47,7 +47,6 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
 Plug 'sheerun/vim-polyglot'
-Plug 'sbdchd/neoformat'
 
 let g:make = 'gmake'
 if exists('make')
@@ -66,11 +65,7 @@ else
   Plug 'junegunn/fzf.vim'
 endif
 
-if v:version >= 704
-  "" Snippets
-  Plug 'SirVer/ultisnips'
-endif
-
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " html
@@ -91,7 +86,7 @@ Plug 'heavenshell/vim-jsdoc'
 
 " elixir
 Plug 'elixir-lang/vim-elixir'
-Plug 'carlosgaldino/elixir-snippets'
+" Plug 'carlosgaldino/elixir-snippets'
 Plug 'slashmili/alchemist.vim'
 
 " erlang
@@ -586,16 +581,6 @@ augroup END
 inoremap <C-Space> <C-x><C-o>
 inoremap <C-@> <C-Space>
 
-" ************************************************************************
-" neoformat
-let g:neoformat_try_formatprg = 1
-
-augroup NeoformatAutoFormat
-  autocmd!
-  autocmd FileType javascript setlocal formatprg=prettier
-  autocmd BufWritePre *.js,*.css,*.scss,*.json Neoformat
-augroup END
-
 " *************************************************************************
 " Emmet
 let g:user_emmet_settings = {
@@ -603,3 +588,10 @@ let g:user_emmet_settings = {
 \      'extends' : 'jsx',
 \  },
 \}
+
+" *************************************************************************
+" Prettier
+" https://github.com/prettier/prettier/tree/master/editors/vim#running-manually
+" Don't forget to install prettier globally
+" npm i -g prettier
+nnoremap gp :silent %!prettier --stdin --trailing-comma all --no-semi<CR>
