@@ -38,12 +38,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
 Plug 'sheerun/vim-polyglot'
 
-let g:make = 'gmake'
-if exists('make')
-  let g:make = 'make'
-endif
-Plug 'Shougo/vimproc.vim', {'do': g:make}
-
 "" Vim-Session
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
@@ -263,13 +257,6 @@ augroup vimrc-wrapping
   autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
 augroup END
 
-"" make/cmake
-augroup vimrc-make-cmake
-  autocmd!
-  autocmd FileType make setlocal noexpandtab
-  autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
-augroup END
-
 set autoread
 
 "*****************************************************************************
@@ -398,6 +385,7 @@ let g:user_emmet_settings = {
 \      'extends' : 'jsx',
 \  },
 \}
+let g:user_emmet_leader_key='<C-E>'
 
 "" Prettier (run manually)
 " https://github.com/prettier/prettier/tree/master/editors/vim#running-manually
@@ -524,13 +512,6 @@ augroup vimrc-javascript
   autocmd!
   autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
 augroup END
-
-"*****************************************************************************
-
-"" Include user's local vim config
-if filereadable(expand("~/.config/nvim/local_init.vim"))
-  source ~/.config/nvim/local_init.vim
-endif
 
 "*****************************************************************************
 "" Convenience variables
