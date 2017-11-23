@@ -72,6 +72,9 @@ Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jsdoc-syntax.vim'
 Plug 'heavenshell/vim-jsdoc'
 
+" Typescript
+Plug 'mhartington/nvim-typescript'
+
 call plug#end()
 
 " ----------------------------------------------------------------------
