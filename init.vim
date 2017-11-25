@@ -37,6 +37,7 @@ Plug 'vim-scripts/grep.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
 Plug 'sheerun/vim-polyglot'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 "" Vim-Session
 Plug 'xolox/vim-misc'
@@ -143,6 +144,9 @@ let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
   colorscheme OceanicNext
 endif
+
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
 
 set mousemodel=popup
 set t_Co=256
@@ -394,7 +398,12 @@ let g:user_emmet_leader_key='<C-E>'
 " https://github.com/prettier/prettier/tree/master/editors/vim#running-manually
 " Don't forget to install prettier globally
 " npm i -g prettier
-nnoremap gp :silent %!prettier --stdin --trailing-comma all --no-semi<CR>
+" nnoremap gp :silent %!prettier --stdin --trailing-comma all --no-semi<CR>
+
+" vim-prettier
+let g:prettier#exec_cmd_async = 1
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.ts,*.css,*.scss,*.less PrettierAsync
 
 "*****************************************************************************
 " Ale
