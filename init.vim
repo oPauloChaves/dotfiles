@@ -29,7 +29,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mhartington/oceanic-next'
+" Plug 'mhartington/oceanic-next'
+Plug 'rakr/vim-one'
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
@@ -142,11 +143,14 @@ set termguicolors                   " needed to make OceanicNext work
 let no_buffers_menu=1
 
 if !exists('g:not_finish_vimplug')
-  colorscheme OceanicNext
+  " colorscheme OceanicNext
+  let g:one_allow_italics = 1
+  colorscheme one
+  set background=dark
 endif
 
-let g:oceanic_next_terminal_bold = 1
-let g:oceanic_next_terminal_italic = 1
+" let g:oceanic_next_terminal_bold = 1
+" let g:oceanic_next_terminal_italic = 1
 
 set mousemodel=popup
 set t_Co=256
@@ -189,7 +193,7 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'powerlineish'
+let g:airline_theme = 'one'
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -403,7 +407,7 @@ let g:user_emmet_leader_key='<C-E>'
 " vim-prettier
 let g:prettier#exec_cmd_async = 1
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.ts,*.css,*.scss,*.less PrettierAsync
+autocmd BufWritePre *.js,*.ts,*.json,*.css,*.scss,*.less PrettierAsync
 
 "*****************************************************************************
 " Ale
