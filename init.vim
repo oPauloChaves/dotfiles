@@ -30,7 +30,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'mhartington/oceanic-next'
-Plug 'rakr/vim-one'
+" Plug 'rakr/vim-one'
+Plug 'joshdick/onedark.vim'
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
@@ -144,9 +145,14 @@ let no_buffers_menu=1
 
 if !exists('g:not_finish_vimplug')
   " colorscheme OceanicNext
-  let g:one_allow_italics = 1
-  colorscheme one
-  set background=dark
+
+  " let g:one_allow_italics = 1
+  " colorscheme one
+  " set background=dark
+ 
+  let g:onedark_termcolors = 256
+  let g:onedark_terminal_italics = 1
+  colorscheme onedark
 endif
 
 " let g:oceanic_next_terminal_bold = 1
@@ -193,7 +199,7 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'one'
+let g:airline_theme = 'onedark'
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
