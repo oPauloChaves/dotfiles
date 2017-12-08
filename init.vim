@@ -39,7 +39,9 @@ Plug 'vim-scripts/grep.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
 Plug 'sheerun/vim-polyglot'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'prettier/vim-prettier', {
+    \ 'do': 'npm install',
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
 
 "" Vim-Session
 Plug 'xolox/vim-misc'
@@ -404,16 +406,10 @@ let g:user_emmet_settings = {
 \}
 let g:user_emmet_leader_key='<C-E>'
 
-"" Prettier (run manually)
-" https://github.com/prettier/prettier/tree/master/editors/vim#running-manually
-" Don't forget to install prettier globally
-" npm i -g prettier
-" nnoremap gp :silent %!prettier --stdin --trailing-comma all --no-semi<CR>
-
 " vim-prettier
 let g:prettier#exec_cmd_async = 1
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.ts,*.json,*.css,*.scss,*.less PrettierAsync
+nnoremap <Leader>p :PrettierAsync<CR>
 
 "*****************************************************************************
 " Ale
