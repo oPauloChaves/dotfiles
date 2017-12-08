@@ -409,7 +409,7 @@ let g:user_emmet_leader_key='<C-E>'
 " vim-prettier
 let g:prettier#exec_cmd_async = 1
 let g:prettier#autoformat = 0
-nnoremap <Leader>p :PrettierAsync<CR>
+nnoremap <Leader>p :Prettier<CR>
 
 "*****************************************************************************
 " Ale
