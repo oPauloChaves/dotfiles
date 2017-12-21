@@ -18,7 +18,6 @@ endif
 " Required:
 call plug#begin(expand('~/.config/nvim/plugged'))
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary'
@@ -59,20 +58,25 @@ Plug 'gorodinskiy/vim-coloresque'
 Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
 
-" javascript
-"" Javascript Bundle
-Plug 'pangloss/vim-javascript'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern', 'for': ['javascript', 'javascript.jsx'] }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'heavenshell/vim-jsdoc'
-
 Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
 
-" Typescript
-Plug 'mhartington/nvim-typescript'
+Plug 'pangloss/vim-javascript'
+Plug 'HerringtonDarkholme/yats.vim'
+
+" https://github.com/Valloric/YouCompleteMe/issues/1751
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --js-completer
+  endif
+endfunction
+
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
 call plug#end()
 
@@ -118,12 +122,6 @@ set nobackup
 set noswapfile
 
 set fileformats=unix,dos,mac
-
-if exists('$SHELL')
-  set shell=$SHELL
-else
-  set shell=/bin/sh
-endif
 
 " session management
 let g:session_directory = "~/.config/nvim/session"
@@ -226,9 +224,6 @@ let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
 let Grep_Skip_Dirs = '.git node_modules'
 
-" terminal emulation
-nnoremap <silent> <leader>sh :terminal<CR>
-
 "*****************************************************************************
 "" Functions
 "*****************************************************************************
@@ -254,12 +249,6 @@ augroup vimrc-remember-cursor-position
   autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
-
-"" txt
-" augroup vimrc-wrapping
-"  autocmd!
-"  autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
-" augroup END
 
 set autoread
 
@@ -324,6 +313,11 @@ cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <leader>e :FZF -m<CR>
 
+" *****************************************************************************
+" YCM
+let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+
 "*****************************************************************************
 " snippets
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -381,7 +375,6 @@ nnoremap <Leader>o :.Gbrowse<CR>
 
 "" Map autocomplete to Ctrl+Space
 inoremap <C-Space> <C-x><C-o>
-" inoremap <C-@> <C-Space>
 
 " *****************************************************************************
 "" Emmet expand JSX
@@ -420,36 +413,6 @@ let g:ale_fix_on_save = 1
 
 let g:ale_linters = {}
 let g:ale_linters['javascript'] = ['eslint']
-
-"*****************************************************************************
-"" Deoplete and tern config
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#disable_auto_complete = 0
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
-  \ 'jspc#omni'
-\]
-
-let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#docs = 1
-let g:deoplete#sources#ternjs#filetypes = [
-	\ 'jsx',
-	\ 'javascript.jsx',
-	\ 'vue',
-	\ 'javascript'
-	\ ]
-
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
-let g:tern_show_argument_hints='on_hold'
-let g:tern_show_signature_in_pum = 1
-let g:tern_map_prefix=','
-let g:tern_map_keys=1
 
 "*****************************************************************************
 "" Custom configs
