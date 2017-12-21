@@ -29,8 +29,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'mhartington/oceanic-next'
-" Plug 'rakr/vim-one'
 Plug 'joshdick/onedark.vim'
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree'
@@ -39,9 +37,6 @@ Plug 'vim-scripts/grep.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
 Plug 'sheerun/vim-polyglot'
-Plug 'prettier/vim-prettier', {
-    \ 'do': 'npm install',
-    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
 
 "" Vim-Session
 Plug 'xolox/vim-misc'
@@ -70,12 +65,15 @@ Plug 'mattn/emmet-vim'
 
 " javascript
 "" Javascript Bundle
-Plug 'othree/yajs'
+Plug 'pangloss/vim-javascript'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern', 'for': ['javascript', 'javascript.jsx'] }
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/jsdoc-syntax.vim'
 Plug 'heavenshell/vim-jsdoc'
+
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
 
 " Typescript
 Plug 'mhartington/nvim-typescript'
@@ -146,19 +144,10 @@ set termguicolors                   " needed to make OceanicNext work
 let no_buffers_menu=1
 
 if !exists('g:not_finish_vimplug')
-  " colorscheme OceanicNext
-
-  " let g:one_allow_italics = 1
-  " colorscheme one
-  " set background=dark
- 
   let g:onedark_termcolors = 256
   let g:onedark_terminal_italics = 1
   colorscheme onedark
 endif
-
-" let g:oceanic_next_terminal_bold = 1
-" let g:oceanic_next_terminal_italic = 1
 
 set mousemodel=popup
 set t_Co=256
@@ -225,12 +214,12 @@ cnoreabbrev Qall qall
 
 "" NERDTree configuration
 let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
+let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__', 'node_modules']
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 50
+let g:NERDTreeWinSize = 40
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 nnoremap <silent> <F3> :NERDTreeToggle<CR>
@@ -271,10 +260,10 @@ augroup vimrc-remember-cursor-position
 augroup END
 
 "" txt
-augroup vimrc-wrapping
-  autocmd!
-  autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
-augroup END
+" augroup vimrc-wrapping
+"  autocmd!
+"  autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
+" augroup END
 
 set autoread
 
@@ -398,6 +387,7 @@ nnoremap <Leader>o :.Gbrowse<CR>
 inoremap <C-Space> <C-x><C-o>
 " inoremap <C-@> <C-Space>
 
+" *****************************************************************************
 "" Emmet expand JSX
 let g:user_emmet_settings = {
 \  'javascript.jsx' : {
@@ -406,10 +396,21 @@ let g:user_emmet_settings = {
 \}
 let g:user_emmet_leader_key='<C-E>'
 
+" *****************************************************************************
 " vim-prettier
 let g:prettier#exec_cmd_async = 1
 let g:prettier#autoformat = 0
 nnoremap <Leader>p :Prettier<CR>
+
+" *****************************************************************************
+" pangloss/vim-javascript
+let g:javascript_plugin_jsdoc = 1
+
+"" Enables code folding for javascript based on our syntax file
+" augroup javascript_folding
+"     au!
+"     au FileType javascript setlocal foldmethod=syntax
+" augroup END
 
 "*****************************************************************************
 " Ale
@@ -519,17 +520,17 @@ augroup END
 
 " html
 " for html files, 2 spaces
-autocmd Filetype html setlocal ts=2 sw=2 expandtab
+" autocmd Filetype html setlocal ts=2 sw=2 expandtab
 
 
 " javascript
 let g:javascript_enable_domhtmlcss = 1
 
 " vim-javascript
-augroup vimrc-javascript
-  autocmd!
-  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
-augroup END
+" augroup vimrc-javascript
+"  autocmd!
+"  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
+" augroup END
 
 "*****************************************************************************
 "" Convenience variables
