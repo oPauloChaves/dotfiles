@@ -18,11 +18,7 @@ endif
 " Required:
 call plug#begin(expand('~/.config/nvim/plugged'))
 
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Yggdroot/indentLine'
 Plug 'tpope/vim-commentary'
@@ -428,24 +424,30 @@ let g:ale_linters['javascript'] = ['eslint']
 "*****************************************************************************
 "" Deoplete and tern config
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#disable_auto_complete = 0
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#enable_camel_case = 1
 let g:deoplete#enable_refresh_always = 1
-let g:deoplete#max_abbr_width = 0
-let g:deoplete#max_menu_width = 0
-let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
   \ 'tern#Complete',
   \ 'jspc#omni'
 \]
 
-let g:tern_request_timeout = 1
-let g:tern_request_timeout = 6000
+let g:deoplete#sources#ternjs#types = 1
+let g:deoplete#sources#ternjs#docs = 1
+let g:deoplete#sources#ternjs#filetypes = [
+	\ 'jsx',
+	\ 'javascript.jsx',
+	\ 'vue',
+	\ 'javascript'
+	\ ]
+
 let g:tern#command = ["tern"]
 let g:tern#arguments = ["--persistent"]
 let g:tern_show_argument_hints='on_hold'
+let g:tern_show_signature_in_pum = 1
 let g:tern_map_prefix=','
 let g:tern_map_keys=1
 
