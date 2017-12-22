@@ -179,6 +179,9 @@ set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
+
 if exists("*fugitive#statusline")
   set statusline+=%{fugitive#statusline()}
 endif
