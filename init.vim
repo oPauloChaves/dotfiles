@@ -46,6 +46,7 @@ endif
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'epilande/vim-react-snippets'
 
 " go
 "" Go Lang Bundle
