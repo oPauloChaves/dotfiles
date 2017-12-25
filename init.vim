@@ -101,8 +101,9 @@ set softtabstop=0
 set shiftwidth=4
 set expandtab
 
-"" Map leader to ,
+" Use a different mapleader (default is "\").
 let mapleader=','
+
 "" Map : to ; (to avoid using SHIFT)
 nnoremap ; :
 
@@ -384,6 +385,7 @@ inoremap <C-Space> <C-x><C-o>
 
 " *****************************************************************************
 "" Emmet expand JSX
+"" https://docs.emmet.io/cheat-sheet/
 let g:user_emmet_settings = {
 \  'javascript.jsx' : {
 \      'extends' : 'jsx',
