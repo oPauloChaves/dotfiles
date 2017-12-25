@@ -62,6 +62,7 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
 
+
 " https://github.com/Valloric/YouCompleteMe/issues/1751
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -211,12 +212,6 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
-" Open init.vim
-nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
-
-" Source vimrc.local
-nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
-
 "" NERDTree configuration
 let g:NERDTreeChDirMode=2
 let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__', 'node_modules']
@@ -234,6 +229,17 @@ nnoremap <silent> <leader>f :Rgrep<CR>
 let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
 let Grep_Skip_Dirs = '.git node_modules'
+
+"*****************************************************************************
+"" Functions
+"*****************************************************************************
+if !exists('*s:setupWrapping')
+  function s:setupWrapping()
+    set wrap
+    set wm=2
+    set textwidth=79
+  endfunction
+endif
 
 "*****************************************************************************
 "" Autocmd Rules
@@ -391,10 +397,6 @@ let g:prettier#exec_cmd_async = 1
 let g:prettier#autoformat = 0
 nnoremap <Leader>p :Prettier<CR>
 
-" *****************************************************************************
-" pangloss/vim-javascript
-let g:javascript_plugin_jsdoc = 1
-
 "*****************************************************************************
 " Ale
 let g:ale_lint_on_text_changed = 'never'
@@ -409,20 +411,8 @@ let g:ale_linters = {}
 let g:ale_linters['javascript'] = ['eslint']
 
 "*****************************************************************************
-" javascript
-let g:javascript_enable_domhtmlcss = 1
-
-" Allow MatchTagAlways to highlight JSX
-let g:mta_filetypes = {
-    \ 'html' : 1,
-    \ 'xhtml' : 1,
-    \ 'xml' : 1,
-    \ 'jinja' : 1,
-    \ 'javascript.jsx' : 1,
-    \}
-
-" Allow Vim-JSX to highlight *.js files
-let g:jsx_ext_required = 0
+"" Custom configs
+"*****************************************************************************
 
 " go
 " vim-go
@@ -487,3 +477,18 @@ augroup go
   au FileType go nmap <leader>rb :<C-u>call <SID>build_go_files()<CR>
 
 augroup END
+
+" javascript
+let g:javascript_enable_domhtmlcss = 1
+
+" Allow MatchTagAlways to highlight JSX
+let g:mta_filetypes = {
+   \ 'html' : 1,
+   \ 'xhtml' : 1,
+   \ 'xml' : 1,
+   \ 'jinja' : 1,
+   \ 'javascript.jsx' : 1,
+   \}
+
+" Allow Vim-JSX to highlight *.js files
+let g:jsx_ext_required = 0
