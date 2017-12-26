@@ -10,10 +10,12 @@ if [ -d "$HOME/.config/nvim" ] ; then
 	mkdir "$HOME/.config/nvim"
 fi
 
-ln -s ~/.config/dotfiles/.bash_aliases ~/.bash_aliases
-ln -s ~/.config/dotfiles/.bashrc ~/.bashrc
-ln -s ~/.config/dotfiles/.fzf.bash ~/.fzf.bash
-ln -s ~/.config/dotfiles/.profile ~/.profile
-ln -s ~/.config/dotfiles/.tern-config ~/.tern-config
-ln -s ~/.config/dotfiles/init.vim ~/.config/nvim/init.vim
+# create backup of current files
 
+ln -s "$HOME/dotfiles/.bash_aliases" "$HOME/.bash_aliases"
+ln -s "$HOME/dotfiles/.bashrc" "$HOME/.bashrc"
+ln -s "$HOME/dotfiles/.fzf.bash" "$HOME/.fzf.bash"
+ln -s "$HOME/dotfiles/.profile" "$HOME/.profile"
+ln -s "$HOME/dotfiles/.tern-config" "$HOME/.tern-config"
+ln -s "$HOME/dotfiles/init.vim" "$HOME/.config/nvim/init.vim"
+ln -s "$HOME/dotfiles/tmux/tmux.conf" "$HOME/.tmux.conf"
