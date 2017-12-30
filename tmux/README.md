@@ -30,7 +30,7 @@ $ tmux source ~/.tmux.conf
 #### Split window
 
 - `prefix` + <kbd>|</kbd> Split vertically
-- `prefix` + <kbd>-<kbd> Split horizontally
+- `prefix` + <kbd>-</kbd> Split horizontally
 
 #### Pane
 
