@@ -3,7 +3,7 @@
 Clone it
 
 ```
-$ git clone htt<kbd>ps:</kbd>//github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+$ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 Reload TMUX environment so TPM is sourced
