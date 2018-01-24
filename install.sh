@@ -19,6 +19,9 @@ fi
 if [ -f ~/.tern-config ]; then
     mv ~/.tern-config ~/.old-tern-config
 fi
+if [ -f ~/.tmux.conf ]; then
+    mv ~/.tmux.conf ~/.old-tmux.conf
+fi
 
 if [ -d "$HOME/.config/nvim" ] ; then
 	mv "$HOME/.config/nvim" "$HOME/.config/old-nvim"
