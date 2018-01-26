@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cd $HOME
 
 if [ -f .bash_aliases ]; then
@@ -24,6 +26,9 @@ fi
 if [ -f .tmux.conf ]; then
     mv .tmux.conf .old-tmux.conf
 fi
+if [ -f .inputrc ]; then
+    mv .inputrc .old-inputrc
+fi
 if [ -f .config/nvim/init.vim ] ; then
     mv .config/nvim/init.vim .config/nvim/old-init.vim
 fi
@@ -34,6 +39,9 @@ ln -s "$HOME/dotfiles/.bashrc" "$HOME/.bashrc"
 ln -s "$HOME/dotfiles/.fzf.bash" "$HOME/.fzf.bash"
 # ln -s "$HOME/dotfiles/.fzf.zsh" "$HOME/.fzf.zsh"
 ln -s "$HOME/dotfiles/.profile" "$HOME/.profile"
+ln -s "$HOME/dotfiles/.inputrc" "$HOME/.inputrc"
 ln -s "$HOME/dotfiles/.tern-config" "$HOME/.tern-config"
 ln -s "$HOME/dotfiles/init.vim" "$HOME/.config/nvim/init.vim"
 ln -s "$HOME/dotfiles/tmux/tmux.conf" "$HOME/.tmux.conf"
+
+echo "Setup done"
