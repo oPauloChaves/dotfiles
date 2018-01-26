@@ -121,3 +121,24 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Maven
+export PATH=/opt/apache-maven/bin:$PATH
+
+# set GOPATH and include Go bins
+export PATH=$PATH:/usr/local/go/bin
+if [ -d "$HOME/go" ]; then
+	GOPATH="$HOME/go"
+	PATH="$GOPATH/bin:$PATH"
+fi
+
+# Android
+# export ANDROID_HOME=$HOME/Android/Sdk
+# export PATH=$PATH:$ANDROID_HOME/tools
+# export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# Install fd: https://github.com/sharkdp/fd
+# follow symbolic links and don't exclude hidden files
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

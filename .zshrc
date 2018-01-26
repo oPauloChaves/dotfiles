@@ -94,8 +94,6 @@ export PATH=/opt/apache-maven/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 
-alias mygo="$GOPATH/src/github.com/opaulochaves"
-
 # export ANDROID_HOME=$HOME/Android/Sdk
 # export PATH=$PATH:$ANDROID_HOME/tools
 # export PATH=$PATH:$ANDROID_HOME/platform-tools
