@@ -63,10 +63,8 @@ Plug 'gorodinskiy/vim-coloresque'
 Plug 'mattn/emmet-vim'
 Plug 'Valloric/MatchTagAlways'
 
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'npm install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
-
+" post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " https://github.com/Valloric/YouCompleteMe/issues/1751
 function! BuildYCM(info)
@@ -480,7 +478,6 @@ let g:mta_filetypes = {
    \ 'html' : 1,
    \ 'xhtml' : 1,
    \ 'xml' : 1,
-   \ 'jinja' : 1,
    \ 'javascript.jsx' : 1,
    \}
 
