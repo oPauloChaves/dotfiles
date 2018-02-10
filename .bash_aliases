@@ -7,4 +7,4 @@ alias gst="git status"
 alias gdf="git diff"
 
 # Go
-alias mygo="$GOPATH/src/github.com/opaulochaves"
+alias mygo="cd $GOPATH/src/github.com/opaulochaves"

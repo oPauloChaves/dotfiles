@@ -96,6 +96,33 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# nvm - Node Version Manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Maven
+export PATH=/opt/apache-maven/bin:$PATH
+
+# set GOPATH and include Go bins
+export PATH=$PATH:/usr/local/go/bin
+if [ -d "$HOME/go" ]; then
+	GOPATH="$HOME/go"
+	PATH="$GOPATH/bin:$PATH"
+fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Install fd: https://github.com/sharkdp/fd
+# follow symbolic links and don't exclude hidden files
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# Android
+# export ANDROID_HOME=$HOME/Android/Sdk
+# export PATH=$PATH:$ANDROID_HOME/tools
+# export PATH=$PATH:$ANDROID_HOME/platform-tools
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -116,29 +143,3 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# Maven
-export PATH=/opt/apache-maven/bin:$PATH
-
-# set GOPATH and include Go bins
-export PATH=$PATH:/usr/local/go/bin
-if [ -d "$HOME/go" ]; then
-	GOPATH="$HOME/go"
-	PATH="$GOPATH/bin:$PATH"
-fi
-
-# Android
-# export ANDROID_HOME=$HOME/Android/Sdk
-# export PATH=$PATH:$ANDROID_HOME/tools
-# export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-# Install fd: https://github.com/sharkdp/fd
-# follow symbolic links and don't exclude hidden files
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-# To apply the command to CTRL-T as well
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
