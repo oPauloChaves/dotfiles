@@ -33,6 +33,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'w0rp/ale'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'tpope/vim-surround'
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -113,7 +115,7 @@ set fileformats=unix,dos,mac
 "" Visual Settings
 syntax on                           " Enable syntax highlighting.
 set ruler
-set number
+set number relativenumber
 
 set termguicolors                   " needed to make OceanicNext work
 let no_buffers_menu=1
