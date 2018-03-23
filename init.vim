@@ -118,6 +118,7 @@ set ruler
 set number relativenumber
 
 set termguicolors                   " needed to make OceanicNext work
+set t_Co=256
 let no_buffers_menu=1
 
 if !exists('g:not_finish_vimplug')
@@ -127,7 +128,6 @@ if !exists('g:not_finish_vimplug')
 endif
 
 set mousemodel=popup
-set t_Co=256
 set guioptions=egmrti
 set gfn=Monospace\ 10
 
@@ -276,9 +276,6 @@ vmap > >gv
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-"" Map autocomplete to Ctrl+Space
-inoremap <C-Space> <C-x><C-o>
-
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
 
@@ -286,6 +283,9 @@ autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
 " YCM
 let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 " *****************************************************************************
 " vim-prettier
