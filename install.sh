@@ -41,7 +41,13 @@ ln -s "$HOME/dotfiles/.fzf.bash" "$HOME/.fzf.bash"
 ln -s "$HOME/dotfiles/.profile" "$HOME/.profile"
 ln -s "$HOME/dotfiles/.inputrc" "$HOME/.inputrc"
 ln -s "$HOME/dotfiles/.tern-config" "$HOME/.tern-config"
-ln -s "$HOME/dotfiles/init.vim" "$HOME/.config/nvim/init.vim"
+
+ln -s "$HOME/dotfiles/nvim/init.vim" "$HOME/.config/nvim/init.vim"
+ln -s "$HOME/dotfiles/nvim/autoload" "$HOME/.config/nvim/autoload"
+ln -s "$HOME/dotfiles/nvim/plugged" "$HOME/.config/nvim/plugged"
+ln -s "$HOME/dotfiles/nvim/ftdetect" "$HOME/.config/nvim/ftdetect"
+ln -s "$HOME/dotfiles/nvim/UltiSnips" "$HOME/.config/nvim/UltiSnips"
+
 ln -s "$HOME/dotfiles/tmux/tmux.conf" "$HOME/.tmux.conf"
 
 echo "Setup done"
