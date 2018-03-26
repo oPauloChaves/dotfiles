@@ -301,7 +301,7 @@ call plug#begin('~/.config/nvim/plugged')
       nmap <silent> <leader>t :FZF<cr>
     endif
 
-    nmap <silent> <leader>r :Buffers<cr>
+    nmap <silent> <leader>b :Buffers<cr>
     nmap <silent> <leader>e :FZF<cr>
     nmap <leader><tab> <plug>(fzf-maps-n)
     xmap <leader><tab> <plug>(fzf-maps-x)
