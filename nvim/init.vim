@@ -154,8 +154,6 @@ call plug#begin('~/.config/nvim/plugged')
     \ 'separator': { 'left': '', 'right': '' },
     \ 'subseparator': { 'left': '', 'right': '' }
     \ }
-    " \   'separator': { 'left': '▓▒░', 'right': '░▒▓' },
-    " \   'subseparator': { 'left': '▒', 'right': '░' }
 
     function! LightlineFileName() abort
       let filename = winwidth(0) > 70 ? expand('%') : expand('%:t')
@@ -258,10 +256,6 @@ call plug#begin('~/.config/nvim/plugged')
   " YCM {{{
     " https://github.com/Valloric/YouCompleteMe/issues/1751
     function! BuildYCM(info)
-      " info is a dictionary with 3 fields
-      " - name:   name of the plugin
-      " - status: 'installed', 'updated', or 'unchanged'
-      " - force:  set on PlugInstall! or PlugUpdate!
       if a:info.status == 'installed' || a:info.force
         !./install.py --js-completer
       endif
@@ -270,8 +264,7 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
     let g:ycm_autoclose_preview_window_after_insertion = 1
     let g:ycm_key_invoke_completion = '<C-Space>'
-    let g:ycm_collect_identifiers_from_tags_files = 1
-  " }}}
+
 
   " UltiSnips {{{
     Plug 'SirVer/ultisnips' " Snippets plugin
@@ -302,7 +295,7 @@ call plug#begin('~/.config/nvim/plugged')
     endif
 
     nmap <silent> <leader>b :Buffers<cr>
-    nmap <silent> <leader>e :FZF<cr>
+    nmap <silent> <leader>e :FZF -m<cr>
     nmap <leader><tab> <plug>(fzf-maps-n)
     xmap <leader><tab> <plug>(fzf-maps-x)
     omap <leader><tab> <plug>(fzf-maps-o)
@@ -338,7 +331,8 @@ call plug#begin('~/.config/nvim/plugged')
   " }}}
 
   " {{{
-  Plug 'sheerun/vim-polyglot'
+  " Plug 'sheerun/vim-polyglot'
+  " let g:polyglot_disabled = ['ruby', 'solidity']
   " }}}
 
   " search inside files using ripgrep. This plugin provides an Ack command.
@@ -361,7 +355,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " NERDTree {{{
     Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-    Plug 'Xuyuanp/nerdtree-git-plugin'
+    " Plug 'Xuyuanp/nerdtree-git-plugin'
 
     " Toggle NERDTree
     function! ToggleNerdTree()
@@ -379,23 +373,23 @@ call plug#begin('~/.config/nvim/plugged')
     let NERDTreeShowHidden=1
     " let NERDTreeDirArrowExpandable = '▷'
     " let NERDTreeDirArrowCollapsible = '▼'
-    let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"   : "✗",
-    \ "Clean"   : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
+    " let g:NERDTreeIndicatorMapCustom = {
+    " \ "Modified"  : "✹",
+    " \ "Staged"    : "✚",
+    " \ "Untracked" : "✭",
+    " \ "Renamed"   : "➜",
+    " \ "Unmerged"  : "═",
+    " \ "Deleted"   : "✖",
+    " \ "Dirty"   : "✗",
+    " \ "Clean"   : "✔︎",
+    " \ 'Ignored'   : '☒',
+    " \ "Unknown"   : "?"
+    " \ }
   " }}}
 
   " vim-fugitive {{{
     Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-rhubarb' " hub extension for fugitive
+    " Plug 'tpope/vim-rhubarb' " hub extension for fugitive
     nmap <silent> <leader>gs :Gstatus<cr>
     nmap <leader>ge :Gedit<cr>
     nmap <silent><leader>gr :Gread<cr>
@@ -412,6 +406,7 @@ call plug#begin('~/.config/nvim/plugged')
     let g:ale_linters = {
     \ 'javascript': ['eslint'],
     \ 'typescript': ['tsserver', 'tslint'],
+	\ 'ruby': ['rubocop'],
     \ 'html': []
     \}
     let g:ale_fixers = {}
@@ -449,13 +444,15 @@ call plug#begin('~/.config/nvim/plugged')
     let g:user_emmet_leader_key='<C-E>'
 
     " Ruby / Ruby on Rails
-    Plug 'tpope/vim-rails', { 'for': 'ruby' }
+    " Plug 'tpope/vim-rails', { 'for': 'ruby' }
   " }}}
 
   " JSON {{{
     Plug 'elzr/vim-json', { 'for': 'json' }
     let g:vim_json_syntax_conceal = 0
   " }}}
+
+  Plug 'pangloss/vim-javascript'
 
   Plug 'tpope/vim-endwise', { 'for': [ 'ruby', 'bash', 'zsh', 'sh' ]}
 " }}}
