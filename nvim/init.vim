@@ -90,14 +90,9 @@ call plug#begin('~/.config/nvim/plugged')
 
   " toggle invisible characters
   set list
-  set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
-  set showbreak=↪
+  set listchars=tab:→\ ,eol:¬,trail:⋅
 
   set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
-  " switch cursor to line when in insert mode, and block when not
-  set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-  \,sm:block-blinkwait175-blinkoff150-blinkon175
 
   if &term =~ '256color'
     " disable background color erase
@@ -113,12 +108,11 @@ call plug#begin('~/.config/nvim/plugged')
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
   " Load colorschemes
-  Plug 'joshdick/onedark.vim'
+  Plug 'flazz/vim-colorschemes'
 
   " LightLine {{{
     Plug 'itchyny/lightline.vim'
     let g:lightline = {
-    \ 'colorscheme': 'onedark',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \       [ 'gitbranch' ],
@@ -245,11 +239,10 @@ call plug#begin('~/.config/nvim/plugged')
   noremap <Leader>h :<C-u>split<CR>
   noremap <Leader>v :<C-u>vsplit<CR>
 
-  " edit ~/.config/nvim/init.vim
-  map <leader>ev :e! ~/.config/nvim/init.vim<cr>
+  " Quickly open/reload vim
+  nnoremap <leader>ev :e! ~/.config/nvim/init.vim<CR>  
+  nnoremap <leader>er :source ~/.config/nvim/init.vim<CR> 
 
-  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
 " }}}
 
 " General Functionality {{{
@@ -264,6 +257,9 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
     let g:ycm_autoclose_preview_window_after_insertion = 1
     let g:ycm_key_invoke_completion = '<C-Space>'
+    let g:ycm_filetype_specific_completion_to_disable = {
+    \ 'ruby': 1
+    \}
 
 
   " UltiSnips {{{
@@ -288,14 +284,14 @@ call plug#begin('~/.config/nvim/plugged')
 
     if isdirectory(".git")
       " if in a git project, use :GFiles
-      nmap <silent> <leader>t :GFiles --cached --others --exclude-standard<cr>
+      nmap <silent> <leader>f :GFiles --cached --others --exclude-standard<cr>
     else
       " otherwise, use :FZF
-      nmap <silent> <leader>t :FZF<cr>
+      nmap <silent> <leader>f :FZF<cr>
     endif
 
+	" Display available mappings
     nmap <silent> <leader>b :Buffers<cr>
-    nmap <silent> <leader>e :FZF -m<cr>
     nmap <leader><tab> <plug>(fzf-maps-n)
     xmap <leader><tab> <plug>(fzf-maps-x)
     omap <leader><tab> <plug>(fzf-maps-o)
@@ -306,6 +302,7 @@ call plug#begin('~/.config/nvim/plugged')
     imap <c-x><c-j> <plug>(fzf-complete-file-ag)
     imap <c-x><c-l> <plug>(fzf-complete-line)
 
+	" Easy way to select a colorscheme
     nnoremap <silent> <Leader>C :call fzf#run({
     \ 'source':
     \   map(split(globpath(&rtp, "colors/*.vim"), "\n"),
@@ -314,25 +311,11 @@ call plug#begin('~/.config/nvim/plugged')
     \ 'options': '+m',
     \ 'left':    30
     \ })<CR>
-
-    command! FZFMru call fzf#run({
-    \  'source':  v:oldfiles,
-    \  'sink':    'e',
-    \  'options': '-m -x +s',
-    \  'down':    '40%'})
-
-    command! -bang -nargs=* Find call fzf#vim#grep(
-      \ 'rg --column --line-number --no-heading --follow --color=always '.<q-args>, 1,
-      \ <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
-    command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
-    command! -bang -nargs=? -complete=dir GFiles
-      \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
   " }}}
 
   " {{{
-  " Plug 'sheerun/vim-polyglot'
-  " let g:polyglot_disabled = ['ruby', 'solidity']
+    Plug 'sheerun/vim-polyglot'
+    let g:polyglot_disabled = ['ruby']
   " }}}
 
   " search inside files using ripgrep. This plugin provides an Ack command.
@@ -355,7 +338,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   " NERDTree {{{
     Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-    " Plug 'Xuyuanp/nerdtree-git-plugin'
 
     " Toggle NERDTree
     function! ToggleNerdTree()
@@ -371,25 +353,10 @@ call plug#begin('~/.config/nvim/plugged')
     nmap <silent> <leader>y :NERDTreeFind<cr>
 
     let NERDTreeShowHidden=1
-    " let NERDTreeDirArrowExpandable = '▷'
-    " let NERDTreeDirArrowCollapsible = '▼'
-    " let g:NERDTreeIndicatorMapCustom = {
-    " \ "Modified"  : "✹",
-    " \ "Staged"    : "✚",
-    " \ "Untracked" : "✭",
-    " \ "Renamed"   : "➜",
-    " \ "Unmerged"  : "═",
-    " \ "Deleted"   : "✖",
-    " \ "Dirty"   : "✗",
-    " \ "Clean"   : "✔︎",
-    " \ 'Ignored'   : '☒',
-    " \ "Unknown"   : "?"
-    " \ }
   " }}}
 
   " vim-fugitive {{{
     Plug 'tpope/vim-fugitive'
-    " Plug 'tpope/vim-rhubarb' " hub extension for fugitive
     nmap <silent> <leader>gs :Gstatus<cr>
     nmap <leader>ge :Gedit<cr>
     nmap <silent><leader>gr :Gread<cr>
@@ -421,19 +388,13 @@ call plug#begin('~/.config/nvim/plugged')
     let g:prettier#autoformat = 0
     nnoremap <Leader>p :Prettier<CR>
   " }}}
-
-  " IndentLine {{{
-    Plug 'Yggdroot/indentLine'
-    let g:indentLine_enabled = 1
-    let g:indentLine_concealcursor = 0
-    let g:indentLine_char = '¦'
-    let g:indentLine_color_gui = '#011010'
-    let g:indentLine_faster = 1
-  "}}}"
 " }}}
 
 " Language-Specific Configuration {{{
   " html / templates {{{
+    autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
+
     " emmet support for vim - easily create markdup wth CSS-like syntax
     Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx', 'eruby' ]}
     let g:user_emmet_settings = {
@@ -442,17 +403,12 @@ call plug#begin('~/.config/nvim/plugged')
     \  },
     \}
     let g:user_emmet_leader_key='<C-E>'
-
-    " Ruby / Ruby on Rails
-    " Plug 'tpope/vim-rails', { 'for': 'ruby' }
   " }}}
 
   " JSON {{{
     Plug 'elzr/vim-json', { 'for': 'json' }
     let g:vim_json_syntax_conceal = 0
   " }}}
-
-  Plug 'pangloss/vim-javascript'
 
   Plug 'tpope/vim-endwise', { 'for': [ 'ruby', 'bash', 'zsh', 'sh' ]}
 " }}}
@@ -462,8 +418,8 @@ call plug#end()
 " Colorscheme and final setup {{{
   " This call must happen after the plug#end() call to ensure
   " that the colorschemes have been loaded
-  let g:onedark_termcolors=256
-  let g:onedark_terminal_italics=1
+  " let g:onedark_termcolors=256
+  " let g:onedark_terminal_italics=1
   colorscheme onedark
   syntax on
   filetype plugin indent on
@@ -471,11 +427,7 @@ call plug#end()
   highlight SpecialKey ctermfg=236
   highlight NonText ctermfg=236
 
-  " make comments and HTML attributes italic
-  highlight Comment cterm=italic
-  highlight htmlArg cterm=italic
-  highlight xmlAttrib cterm=italic
-  highlight Type cterm=italic
+  " no background
   highlight Normal ctermbg=none
 
 " }}}
