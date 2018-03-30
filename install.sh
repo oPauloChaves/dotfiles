@@ -1,43 +1,26 @@
 #!/bin/bash
 
-cd $HOME
+[[ -s "$HOME/.bash_aliases" ]] && mv "$HOME/.bash_aliases" "$HOME/.old-bash_aliases"
+[[ -s "$HOME/.bashrc" ]] && mv "$HOME/.bashrc" "$HOME/.old-bashrc"
+[[ -s "$HOME/.zshrc" ]] && mv "$HOME/.zshrc" "$HOME/.old-zshrc"
+[[ -s "$HOME/.fzf.bash" ]] && mv "$HOME/.fzf.bash" "$HOME/.old-fzf.bash"
+[[ -s "$HOME/.fzf.zsh" ]] && mv "$HOME/.fzf.zsh" "$HOME/.old-fzf.zsh"
+[[ -s "$HOME/.profile" ]] && mv "$HOME/.profile" "$HOME/.old-profile"
+[[ -s "$HOME/.tern-config" ]] && mv "$HOME/.tern-config" "$HOME/.old-tern-config"
+[[ -s "$HOME/.tmux.conf" ]] && mv "$HOME/.tmux.conf" "$HOME/.old-tmux.conf"
+[[ -s "$HOME/.inputrc" ]] && mv "$HOME/.inputrc" "$HOME/.old-inputrc"
 
-if [ -f .bash_aliases ]; then
-    mv .bash_aliases .old-bash_aliases
-fi
-if [ -f .bashrc ]; then
-    mv .bashrc .old-bashrc
-fi
-# if [ -f .zshrc ]; then
-#    mv .zshrc .old-zshrc
-# fi
-if [ -f .fzf.bash ]; then
-    mv .fzf.bash .old-fzf.bash
-fi
-# if [ -f .fzf.zsh ]; then
-#    mv .fzf.zsh .old-fzf.zsh
-# fi
-if [ -f .profile ]; then
-    mv .profile .old-profile
-fi
-if [ -f .tern-config ]; then
-    mv .tern-config .old-tern-config
-fi
-if [ -f .tmux.conf ]; then
-    mv .tmux.conf .old-tmux.conf
-fi
-if [ -f .inputrc ]; then
-    mv .inputrc .old-inputrc
-fi
-if [ -f .config/nvim/init.vim ] ; then
-    mv .config/nvim/init.vim .config/nvim/old-init.vim
+if [ ! -s "$HOME/.config/nvim" ]; then
+    mkdir "$HOME/.config/nvim"
+else
+    [[ -s "$HOME/.config/nvim/init.vim" ]] && mv "$HOME/.config/nvim/init.vim" "$HOME/.config/nvim/old-init.vim"
 fi
 
 ln -s "$HOME/dotfiles/.bash_aliases" "$HOME/.bash_aliases"
 ln -s "$HOME/dotfiles/.bashrc" "$HOME/.bashrc"
-# ln -s "$HOME/dotfiles/.zshrc" "$HOME/.zshrc"
+ln -s "$HOME/dotfiles/.zshrc" "$HOME/.zshrc"
 ln -s "$HOME/dotfiles/.fzf.bash" "$HOME/.fzf.bash"
-# ln -s "$HOME/dotfiles/.fzf.zsh" "$HOME/.fzf.zsh"
+ln -s "$HOME/dotfiles/.fzf.zsh" "$HOME/.fzf.zsh"
 ln -s "$HOME/dotfiles/.profile" "$HOME/.profile"
 ln -s "$HOME/dotfiles/.inputrc" "$HOME/.inputrc"
 ln -s "$HOME/dotfiles/.tern-config" "$HOME/.tern-config"
