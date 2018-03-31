@@ -240,8 +240,8 @@ call plug#begin('~/.config/nvim/plugged')
   noremap <Leader>v :<C-u>vsplit<CR>
 
   " Quickly open/reload vim
-  nnoremap <leader>ev :e! ~/.config/nvim/init.vim<CR>  
-  nnoremap <leader>er :source ~/.config/nvim/init.vim<CR> 
+  nnoremap <leader>ev :e! ~/.config/nvim/init.vim<CR>
+  nnoremap <leader>er :source ~/.config/nvim/init.vim<CR>
 
 " }}}
 
@@ -373,7 +373,7 @@ call plug#begin('~/.config/nvim/plugged')
     let g:ale_linters = {
     \ 'javascript': ['eslint'],
     \ 'typescript': ['tsserver', 'tslint'],
-	\ 'ruby': ['rubocop'],
+    \ 'ruby': ['rubocop'],
     \ 'html': []
     \}
     let g:ale_fixers = {}
