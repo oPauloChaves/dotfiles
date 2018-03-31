@@ -4,6 +4,7 @@ Most config is from here: https://github.com/nicknisi/dotfiles
 
 ### Install
 
+- tmux
 - neovim
   - [YouCompleteMe on Fedora](https://github.com/Valloric/YouCompleteMe#fedora-linux-x64)
 - pip, pip3
@@ -23,3 +24,35 @@ Most config is from here: https://github.com/nicknisi/dotfiles
 ```sh
 $ cd ~/.config/dotfiles && sh install.sh
 ```
+
+### Tmux plugins
+
+```sh
+$ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# jump into tmux
+$ tmux
+# and PREFIX I
+```
+
+### Docker completion
+
+```sh
+mkdir -p ~/.oh-my-zsh/plugins/docker/
+curl -fLo ~/.oh-my-zsh/plugins/docker/_docker https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker
+
+# docker-compose - https://docs.docker.com/compose/completion/
+$ mkdir -p ~/.zsh/completion
+$ curl -L https://raw.githubusercontent.com/docker/compose/1.20.1/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
+```
+
+Using a [plugin](https://github.com/robbyrussell/oh-my-zsh#using-oh-my-zsh) within oh-my-zsh
+
+### Sublime Text
+
+[linux repositories](https://www.sublimetext.com/docs/3/linux_repositories.html)
+
+
+## TODO
+
+- Automate installation
