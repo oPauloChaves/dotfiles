@@ -90,7 +90,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   " toggle invisible characters
   set list
-  set listchars=tab:→\ ,eol:¬,trail:⋅
+  " set listchars=tab:→\ ,eol:¬,trail:⋅
 
   set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 
@@ -108,11 +108,13 @@ call plug#begin('~/.config/nvim/plugged')
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
   " Load colorschemes
-  Plug 'flazz/vim-colorschemes'
+  " Plug 'flazz/vim-colorschemes'
+  Plug 'NLKNguyen/papercolor-theme'
 
   " LightLine {{{
     Plug 'itchyny/lightline.vim'
     let g:lightline = {
+    \ 'colorscheme': 'PaperColor',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \       [ 'gitbranch' ],
@@ -274,12 +276,8 @@ call plug#begin('~/.config/nvim/plugged')
   " }}}"
 
   " FZF {{{
-    if isdirectory('/usr/local/opt/fzf')
-      Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-    else
-      Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-      Plug 'junegunn/fzf.vim'
-    endif
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+    Plug 'junegunn/fzf.vim'
     let g:fzf_layout = { 'down': '~25%' }
 
     if isdirectory(".git")
@@ -420,7 +418,8 @@ call plug#end()
   " that the colorschemes have been loaded
   " let g:onedark_termcolors=256
   " let g:onedark_terminal_italics=1
-  colorscheme onedark
+  set background=light
+  colorscheme PaperColor
   syntax on
   filetype plugin indent on
   " make the highlighting of tabs and other non-text less annoying
@@ -428,6 +427,13 @@ call plug#end()
   highlight NonText ctermfg=236
 
   " no background
-  highlight Normal ctermbg=none
+  " highlight Normal ctermbg=none
+  " let g:PaperColor_Theme_Options = {
+  " \   'theme': {
+  " \     'default.dark': {
+  " \       'transparent_background': 1
+  " \     }
+  " \   }
+  " \ }
 
 " }}}

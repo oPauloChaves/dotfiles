@@ -94,6 +94,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias kr="cd $HOME/code/kr8os"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Install fd: https://github.com/sharkdp/fd
@@ -111,9 +112,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-# open man pages with vim
-export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist noma' -\""
 
 # Load tmux when opening the terminal
 if command -v tmux>/dev/null; then
