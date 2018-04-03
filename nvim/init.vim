@@ -415,25 +415,17 @@ call plug#end()
 
 " Colorscheme and final setup {{{
   " This call must happen after the plug#end() call to ensure
-  " that the colorschemes have been loaded
-  " let g:onedark_termcolors=256
-  " let g:onedark_terminal_italics=1
+
+  let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.light': {
+  \       'transparent_background': 1,
+  \     }
+  \   }
+  \ }
+
   set background=light
   colorscheme PaperColor
   syntax on
   filetype plugin indent on
-  " make the highlighting of tabs and other non-text less annoying
-  highlight SpecialKey ctermfg=236
-  highlight NonText ctermfg=236
-
-  " no background
-  " highlight Normal ctermbg=none
-  " let g:PaperColor_Theme_Options = {
-  " \   'theme': {
-  " \     'default.dark': {
-  " \       'transparent_background': 1
-  " \     }
-  " \   }
-  " \ }
-
 " }}}
