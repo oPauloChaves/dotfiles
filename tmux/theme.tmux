@@ -7,8 +7,8 @@ set -g status-justify 'left'
 setw -g window-status-separator ' '
 
 # TODO check the real need for this
-set -g status-right '%R | %a | %d.%b.%y | #[fg=red]@#H'
-setw -g window-status-current-format '[#I.#W]'
+# set -g status-right '%R | %a | %d.%b.%y | #[fg=red]@#H'
+# setw -g window-status-current-format '[#I.#W]'
 
 # This tmux statusbar config was created by tmuxline.vim
 # on Tue, 01 Nov 2016
