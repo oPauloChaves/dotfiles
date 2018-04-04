@@ -418,13 +418,13 @@ call plug#end()
 
   let g:PaperColor_Theme_Options = {
   \   'theme': {
-  \     'default.light': {
+  \     'default.dark': {
   \       'transparent_background': 1,
   \     }
   \   }
   \ }
 
-  set background=light
+  set background=dark
   colorscheme PaperColor
   syntax on
   filetype plugin indent on
