@@ -15,8 +15,9 @@ call plug#begin('~/.config/nvim/plugged')
   set history=1000 " change history to 1000
   set textwidth=120
 
-  set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-  set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+  "" Directories for swp files
+  set nobackup
+  set noswapfile
 
   if (has('nvim'))
     " show results of substition as they're happening
@@ -233,6 +234,10 @@ call plug#begin('~/.config/nvim/plugged')
   "" Clean search (highlight)
   nnoremap <silent> <leader><space> :noh<cr>
 
+  "" Vmap for maintain Visual Mode after shifting > and <
+  vmap < <gv
+  vmap > >gv
+
   "" Move visual block
   vnoremap J :m '>+1<CR>gv=gv
   vnoremap K :m '<-2<CR>gv=gv
@@ -420,6 +425,14 @@ call plug#end()
   \   'theme': {
   \     'default.dark': {
   \       'transparent_background': 1,
+  \       'override': {
+  \         'color03' : ['#75d8b9', ''],
+  \         'color06' : ['#d6b99a', ''],
+  \         'color07' : ['#c2c2c2', ''],
+  \         'color09' : ['#d6b99a', ''],
+  \         'color10' : ['#d6b99a', ''],
+  \         'color11' : ['#d6b99a', ''],
+  \       }
   \     }
   \   }
   \ }

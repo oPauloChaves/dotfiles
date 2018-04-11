@@ -96,6 +96,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias kr="cd $HOME/code/kr8os"
 
+# tmux: kill all detached sessions
+alias tmux-ls-sessions="tmux list-sessions"
+alias tmux-kill-detached="tmux list-sessions | grep -v attached | cut -d: -f1 |  xargs -t -n1 tmux kill-session -t"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Install fd: https://github.com/sharkdp/fd
 # follow symbolic links and don't exclude hidden files
