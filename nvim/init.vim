@@ -93,6 +93,9 @@ call plug#begin('~/.config/nvim/plugged')
   set list
   " set listchars=tab:→\ ,eol:¬,trail:⋅
 
+  " Remove unwanted whitespace when saving
+  autocmd BufWritePre * silent! %s/\s\+$//e
+
   set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 
   if &term =~ '256color'
