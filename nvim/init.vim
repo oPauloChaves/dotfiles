@@ -113,12 +113,12 @@ call plug#begin('~/.config/nvim/plugged')
 
   " Load colorschemes
   " Plug 'flazz/vim-colorschemes'
-  Plug 'NLKNguyen/papercolor-theme'
+  Plug 'joshdick/onedark.vim'
 
   " LightLine {{{
     Plug 'itchyny/lightline.vim'
     let g:lightline = {
-    \ 'colorscheme': 'PaperColor',
+    \ 'colorscheme': 'onedark',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \       [ 'gitbranch' ],
@@ -423,25 +423,19 @@ call plug#end()
 
 " Colorscheme and final setup {{{
   " This call must happen after the plug#end() call to ensure
-
-  let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default.dark': {
-  \       'transparent_background': 1,
-  \       'override': {
-  \         'color03' : ['#75d8b9', ''],
-  \         'color06' : ['#d6b99a', ''],
-  \         'color07' : ['#c2c2c2', ''],
-  \         'color09' : ['#d6b99a', ''],
-  \         'color10' : ['#d6b99a', ''],
-  \         'color11' : ['#d6b99a', ''],
-  \       }
-  \     }
-  \   }
-  \ }
-
-  set background=dark
-  colorscheme PaperColor
+  " that the colorschemes have been loaded
   syntax on
+  colorscheme onedark
+
+  let g:onedark_termcolors=256
+  let g:onedark_terminal_italics=1
+
   filetype plugin indent on
+
+  " make the highlighting of tabs and other non-text less annoying
+  highlight SpecialKey ctermfg=236
+  highlight NonText ctermfg=236
+
+  " transparent background
+  highlight Normal ctermbg=none
 " }}}
