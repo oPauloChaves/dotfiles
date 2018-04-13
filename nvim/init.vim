@@ -1,3 +1,5 @@
+set nocompatible                            " disable vi compatibility
+
 " ensure vim-plug is installed and then load it
 call functions#PlugLoad()
 call plug#begin('~/.config/nvim/plugged')
@@ -15,7 +17,7 @@ call plug#begin('~/.config/nvim/plugged')
   set history=1000 " change history to 1000
   set textwidth=120
 
-  "" Directories for swp files
+  "" Directories for swap files
   set nobackup
   set noswapfile
 
@@ -25,54 +27,56 @@ call plug#begin('~/.config/nvim/plugged')
     set inccommand=nosplit
   endif
 
-  set backspace=indent,eol,start " make backspace behave in a sane manner
+  " Allow backspace to work on all characters (not just insert mode)
+  set backspace=indent,eol,start
+
   "" Copy/Paste/Cut
   if has('unnamedplus')
     set clipboard=unnamed,unnamedplus
   endif
 
-  if has('mouse')
-    set mouse=a
-  endif
+  " mouse support
+  set mouse=a
 
   " Searching
-  set ignorecase " case insensitive searching
-  set smartcase " case-sensitive if expresson contains a capital letter
-  set hlsearch " highlight search results
-  set incsearch " set incremental search, like modern browsers
-  set nolazyredraw " don't redraw while executing macros
+  set ignorecase                       " case insensitive searching
+  set smartcase                        " case-sensitive if expresson contains a capital letter
+  set hlsearch                         " highlight search results
+  set incsearch                        " set incremental search, like modern browsers
+  set nolazyredraw                     " don't redraw while executing macros
 
-  set magic " Set magic on, for regex
+  set magic                            " Set magic on, for regex
 
   " error bells
   set noerrorbells
   set visualbell
   set t_vb=
   set tm=500
+
+  set ttyfast                          " make laggy connections work faster
 " }}}
 
 " Appearance {{{
   set number relativenumber " show line numbers
-  set wrap " turn on line wrapping
-  set wrapmargin=8 " wrap lines when coming within n characters from side
-  set linebreak " set soft wrapping
-  set showbreak=… " show ellipsis at breaking
-  set autoindent " automatically set indent of new line
-  set ttyfast " faster redrawing
+  set wrap                  " turn on line wrapping
+  set wrapmargin=8          " wrap lines when coming within n characters from side
+  set linebreak             " set soft wrapping
+  set showbreak=…           " show ellipsis at breaking
+  set autoindent            " automatically set indent of new line
   set diffopt+=vertical
-  set laststatus=2 " show the satus line all the time
-  set so=7 " set 7 lines to the cursors - when moving vertical
-  set wildmenu " enhanced command line completion
-  set hidden " current buffer can be put into background
-  set showcmd " show incomplete commands
-  set noshowmode " don't show which mode disabled for PowerLine
+  set laststatus=2          " show the satus line all the time
+  set so=7                  " set 7 lines to the cursors - when moving vertical
+  set wildmenu              " enhanced command line completion
+  set hidden                " current buffer can be put into background
+  set showcmd               " show incomplete commands
+  set noshowmode            " don't show which mode disabled for PowerLine
   set wildmode=list:longest " complete files like a shell
-  set scrolloff=3 " lines of text around cursor
+  set scrolloff=3           " lines of text around cursor
   set shell=$SHELL
-  set cmdheight=1 " command bar height
-  set title " set terminal title
-  set showmatch " show matching braces
-  set mat=2 " how many tenths of a second to blink
+  set cmdheight=1           " command bar height
+  set title                 " set terminal title
+  set showmatch             " show matching braces
+  set mat=2                 " how many tenths of a second to blink
 
   " Tab control
   set noexpandtab " insert tabs rather than spaces for <Tab>
@@ -93,26 +97,25 @@ call plug#begin('~/.config/nvim/plugged')
   set list
   " set listchars=tab:→\ ,eol:¬,trail:⋅
 
-  " Remove unwanted whitespace when saving
-  autocmd BufWritePre * silent! %s/\s\+$//e
 
   set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 
   if &term =~ '256color'
-    " disable background color erase
+    " disable Background Color Erase (BCE) so that color schemes
+    " render properly when inside 256-color tmux and GNU screen.
+    " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
     set t_ut=
   endif
 
   " enable 24 bit color support if supported
-  if (has('mac') && empty($TMUX) && has("termguicolors"))
-    set termguicolors
-  endif
+  " if (has('nvim') && empty($TMUX) && has("termguicolors"))
+  "   set termguicolors
+  " endif
 
   " highlight conflicts
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
   " Load colorschemes
-  " Plug 'flazz/vim-colorschemes'
   Plug 'joshdick/onedark.vim'
 
   " LightLine {{{
@@ -421,20 +424,35 @@ call plug#begin('~/.config/nvim/plugged')
 
 call plug#end()
 
+
+" Autocmd Rules {{{
+" Remove unwanted whitespace when saving
+autocmd BufWritePre * silent! %s/\s\+$//e
+
+"" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
+augroup vimrc-sync-fromstart
+  autocmd!
+  autocmd BufEnter * :syntax sync maxlines=200
+augroup END
+
+"" Remember cursor position
+augroup vimrc-remember-cursor-position
+  autocmd!
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup END
+" }}}
+
 " Colorscheme and final setup {{{
   " This call must happen after the plug#end() call to ensure
   " that the colorschemes have been loaded
   syntax on
   colorscheme onedark
 
-  let g:onedark_termcolors=256
   let g:onedark_terminal_italics=1
 
   filetype plugin indent on
 
-  " make the highlighting of tabs and other non-text less annoying
-  highlight SpecialKey ctermfg=236
-  highlight NonText ctermfg=236
+  highlight String ctermfg=101 guifg=#00C379
 
   " transparent background
   highlight Normal ctermbg=none
