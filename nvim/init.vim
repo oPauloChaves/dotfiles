@@ -461,4 +461,6 @@ augroup END
   colorscheme onedark
 
   filetype plugin indent on
+
+  highlight Normal ctermbg=none
 " }}}
