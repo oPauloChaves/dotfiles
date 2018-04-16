@@ -445,15 +445,20 @@ augroup END
 " Colorscheme and final setup {{{
   " This call must happen after the plug#end() call to ensure
   " that the colorschemes have been loaded
+
+  let g:onedark_color_overrides = {
+  \   "purple": { "gui": "#e1e1e1", "cterm": "31" },
+  \   "blue": { "gui": "#e1e1e1", "cterm": "248" },
+  \   "cyan": { "gui": "#e1e1e1", "cterm": "67" },
+  \   "white": { "gui": "#e1e1e1", "cterm": "248" },
+  \   "yellow": { "gui": "#e1e1e1", "cterm": "248" },
+  \   "dark_yellow": { "gui": "#e1e1e1", "cterm": "66" },
+  \   "red": { "gui": "#e1e1e1", "cterm": "67" },
+  \   "green": { "gui": "#00C379", "cterm": "65" }
+  \}
+
   syntax on
   colorscheme onedark
 
-  let g:onedark_terminal_italics=1
-
   filetype plugin indent on
-
-  highlight String ctermfg=101 guifg=#00C379
-
-  " transparent background
-  highlight Normal ctermbg=none
 " }}}
