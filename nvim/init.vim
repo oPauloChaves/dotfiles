@@ -226,8 +226,12 @@ call plug#begin('~/.config/nvim/plugged')
   "" Tab navigation
   noremap <leader>w :tabnext<CR>
   noremap <leader>q :tabprevious<CR>
-  noremap <leader>d :tabclose<CR>
   noremap <leader>t :tabnew<CR>
+
+  "" Buffer navigation
+  noremap <leader>z :bp<CR>
+  noremap <leader>x :bn<CR>
+  " noremap <leader>d :bd<CR>
 
   "" Switching windows
   noremap <C-j> <C-w>j
@@ -246,9 +250,9 @@ call plug#begin('~/.config/nvim/plugged')
   vnoremap J :m '>+1<CR>gv=gv
   vnoremap K :m '<-2<CR>gv=gv
 
-  "" Split
-  noremap <Leader>h :<C-u>split<CR>
-  noremap <Leader>v :<C-u>vsplit<CR>
+  "" Split open buffer
+  noremap <Leader>h :sb
+  noremap <Leader>v :vert sb
 
   " Quickly open/reload vim
   nnoremap <leader>ev :e! ~/.config/nvim/init.vim<CR>
