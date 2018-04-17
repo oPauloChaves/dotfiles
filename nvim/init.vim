@@ -121,7 +121,6 @@ call plug#begin('~/.config/nvim/plugged')
   " LightLine {{{
     Plug 'itchyny/lightline.vim'
     let g:lightline = {
-    \ 'colorscheme': 'onedark',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \       [ 'gitbranch' ],
@@ -224,12 +223,11 @@ call plug#begin('~/.config/nvim/plugged')
   noremap <leader>p "+gP<CR>
   noremap XX "+x<CR>
 
-  "" Close buffer
-  noremap <leader>c :bd<CR>
-
-  "" Buffer nav
-  noremap <leader>q :bp<CR>
-  noremap <leader>w :bn<CR>
+  "" Tab navigation
+  noremap <leader>w :tabnext<CR>
+  noremap <leader>q :tabprevious<CR>
+  noremap <leader>d :tabclose<CR>
+  noremap <leader>t :tabnew<CR>
 
   "" Switching windows
   noremap <C-j> <C-w>j
@@ -446,21 +444,28 @@ augroup END
   " This call must happen after the plug#end() call to ensure
   " that the colorschemes have been loaded
 
+  " white - normal text
+
+  set background=light
   let g:onedark_color_overrides = {
-  \   "purple": { "gui": "#e1e1e1", "cterm": "31" },
-  \   "blue": { "gui": "#e1e1e1", "cterm": "248" },
-  \   "cyan": { "gui": "#e1e1e1", "cterm": "67" },
-  \   "white": { "gui": "#e1e1e1", "cterm": "248" },
-  \   "yellow": { "gui": "#e1e1e1", "cterm": "248" },
-  \   "dark_yellow": { "gui": "#e1e1e1", "cterm": "66" },
-  \   "red": { "gui": "#e1e1e1", "cterm": "67" },
-  \   "green": { "gui": "#00C379", "cterm": "65" }
+  \   "purple": { "gui": "#e1e1e1", "cterm": "90" },
+  \   "blue": { "gui": "#e1e1e1", "cterm": "239" },
+  \   "cyan": { "gui": "#e1e1e1", "cterm": "24" },
+  \   "white": { "gui": "#e1e1e1", "cterm": "238" },
+  \   "yellow": { "gui": "#e1e1e1", "cterm": "238" },
+  \   "dark_yellow": { "gui": "#e1e1e1", "cterm": "238" },
+  \   "red": { "gui": "#e1e1e1", "cterm": "239" },
+  \   "green": { "gui": "#00C379", "cterm": "29" },
+  \   "comment_grey": { "gui": "#00C379", "cterm": "246" },
+  \   "menu_grey": { "gui": "#00C379", "cterm": "246" },
+  \   "black": { "gui": "#00C379", "cterm": "246" },
+  \   "visual_grey": { "gui": "#00C379", "cterm": "238" },
+  \   "visual_black": { "gui": "#00C379", "cterm": "252" }
   \}
 
   syntax on
   colorscheme onedark
 
   filetype plugin indent on
-
   highlight Normal ctermbg=none
 " }}}
