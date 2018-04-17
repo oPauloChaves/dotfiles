@@ -449,21 +449,23 @@ augroup END
   " that the colorschemes have been loaded
 
   " white - normal text
+  " 234 = black
+  " 90 = purple
 
   set background=light
   let g:onedark_color_overrides = {
   \   "purple": { "gui": "#e1e1e1", "cterm": "90" },
-  \   "blue": { "gui": "#e1e1e1", "cterm": "239" },
+  \   "blue": { "gui": "#e1e1e1", "cterm": "234" },
   \   "cyan": { "gui": "#e1e1e1", "cterm": "24" },
-  \   "white": { "gui": "#e1e1e1", "cterm": "238" },
-  \   "yellow": { "gui": "#e1e1e1", "cterm": "238" },
-  \   "dark_yellow": { "gui": "#e1e1e1", "cterm": "238" },
-  \   "red": { "gui": "#e1e1e1", "cterm": "239" },
+  \   "white": { "gui": "#e1e1e1", "cterm": "234" },
+  \   "yellow": { "gui": "#e1e1e1", "cterm": "234" },
+  \   "dark_yellow": { "gui": "#e1e1e1", "cterm": "234" },
+  \   "red": { "gui": "#e1e1e1", "cterm": "234" },
   \   "green": { "gui": "#00C379", "cterm": "29" },
   \   "comment_grey": { "gui": "#00C379", "cterm": "246" },
   \   "menu_grey": { "gui": "#00C379", "cterm": "246" },
   \   "black": { "gui": "#00C379", "cterm": "246" },
-  \   "visual_grey": { "gui": "#00C379", "cterm": "238" },
+  \   "visual_grey": { "gui": "#00C379", "cterm": "234" },
   \   "visual_black": { "gui": "#00C379", "cterm": "252" }
   \}
 
