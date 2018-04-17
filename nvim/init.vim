@@ -116,12 +116,13 @@ call plug#begin('~/.config/nvim/plugged')
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
   " Load colorschemes
-  Plug 'joshdick/onedark.vim'
+  Plug 'NLKNguyen/papercolor-theme'
 
   " LightLine {{{
     Plug 'itchyny/lightline.vim'
+
     let g:lightline = {
-    \ 'colorscheme': 'onedark',
+    \ 'colorscheme': 'PaperColor',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \       [ 'gitbranch' ],
@@ -446,21 +447,35 @@ augroup END
   " This call must happen after the plug#end() call to ensure
   " that the colorschemes have been loaded
 
-  let g:onedark_color_overrides = {
-  \   "purple": { "gui": "#e1e1e1", "cterm": "31" },
-  \   "blue": { "gui": "#e1e1e1", "cterm": "248" },
-  \   "cyan": { "gui": "#e1e1e1", "cterm": "67" },
-  \   "white": { "gui": "#e1e1e1", "cterm": "248" },
-  \   "yellow": { "gui": "#e1e1e1", "cterm": "248" },
-  \   "dark_yellow": { "gui": "#e1e1e1", "cterm": "66" },
-  \   "red": { "gui": "#e1e1e1", "cterm": "67" },
-  \   "green": { "gui": "#00C379", "cterm": "65" }
-  \}
-
   syntax on
-  colorscheme onedark
+
+  " color00 - background
+  " color03 - string
+  " color05 - comment
+  " color06,09,10,11,14 - keyword
+
+  let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.light': {
+  \       'override' : {
+  \         'color00' : ['#080808', '254'],
+  \         'color03' : ['#080808', '29'],
+  \         'color05' : ['#080808', '245'],
+  \         'color06' : ['#080808', '24'],
+  \         'color09' : ['#080808', '24'],
+  \         'color10' : ['#080808', '24'],
+  \         'color11' : ['#080808', '24'],
+  \         'color14' : ['#080808', '24'],
+  \         'linenumber_bg' : ['#080808', '254'],
+  \         'linenumber_fg' : ['#080808', '246']
+  \       }
+  \     }
+  \   }
+  \ }
+
+  " colorscheme onedark
+  set background=light
+  colorscheme PaperColor
 
   filetype plugin indent on
-
-  highlight Normal ctermbg=none
 " }}}

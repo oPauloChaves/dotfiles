@@ -39,6 +39,7 @@ ln -s "$HOME/dotfiles/.tern-config" "$HOME/.tern-config"
 ln -s "$HOME/dotfiles/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 ln -s "$HOME/dotfiles/nvim/autoload" "$HOME/.config/nvim/autoload"
 ln -s "$HOME/dotfiles/nvim/plugged" "$HOME/.config/nvim/plugged"
+ln -s "$HOME/dotfiles/nvim/colors" "$HOME/.config/nvim/colors"
 ln -s "$HOME/dotfiles/nvim/ftdetect" "$HOME/.config/nvim/ftdetect"
 ln -s "$HOME/dotfiles/nvim/UltiSnips" "$HOME/.config/nvim/UltiSnips"
 
