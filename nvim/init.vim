@@ -454,7 +454,7 @@ augroup END
 
   set background=light
   let g:onedark_color_overrides = {
-  \   "purple": { "gui": "#e1e1e1", "cterm": "90" },
+  \   "purple": { "gui": "#e1e1e1", "cterm": "27" },
   \   "blue": { "gui": "#e1e1e1", "cterm": "234" },
   \   "cyan": { "gui": "#e1e1e1", "cterm": "24" },
   \   "white": { "gui": "#e1e1e1", "cterm": "234" },
