@@ -115,9 +115,6 @@ call plug#begin('~/.config/nvim/plugged')
   " highlight conflicts
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-  " Load colorschemes
-  Plug 'joshdick/onedark.vim'
-
   " LightLine {{{
     Plug 'itchyny/lightline.vim'
     let g:lightline = {
@@ -301,7 +298,7 @@ call plug#begin('~/.config/nvim/plugged')
       nmap <silent> <leader>f :FZF<cr>
     endif
 
-	" Display available mappings
+    " Display available mappings
     nmap <silent> <leader>b :Buffers<cr>
     nmap <leader><tab> <plug>(fzf-maps-n)
     xmap <leader><tab> <plug>(fzf-maps-x)
@@ -312,17 +309,6 @@ call plug#begin('~/.config/nvim/plugged')
     imap <c-x><c-f> <plug>(fzf-complete-path)
     imap <c-x><c-j> <plug>(fzf-complete-file-ag)
     imap <c-x><c-l> <plug>(fzf-complete-line)
-
-	" Easy way to select a colorscheme
-    nnoremap <silent> <Leader>C :call fzf#run({
-    \ 'source':
-    \   map(split(globpath(&rtp, "colors/*.vim"), "\n"),
-    \     "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
-    \ 'sink':    'colo',
-    \ 'options': '+m',
-    \ 'left':    30
-    \ })<CR>
-  " }}}
 
   " {{{
     Plug 'sheerun/vim-polyglot'
@@ -340,9 +326,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
   Plug 'tpope/vim-surround'
-
-  " tmux integration for vim
-  " Plug 'benmills/vimux'
 
   " .editorconfig support
   Plug 'editorconfig/editorconfig-vim'
@@ -448,30 +431,8 @@ augroup END
   " This call must happen after the plug#end() call to ensure
   " that the colorschemes have been loaded
 
-  " white - normal text
-  " 234 = black
-  " 90 = purple
-
-  set background=light
-  let g:onedark_color_overrides = {
-  \   "purple": { "gui": "#e1e1e1", "cterm": "20" },
-  \   "blue": { "gui": "#e1e1e1", "cterm": "234" },
-  \   "cyan": { "gui": "#e1e1e1", "cterm": "24" },
-  \   "white": { "gui": "#e1e1e1", "cterm": "234" },
-  \   "yellow": { "gui": "#e1e1e1", "cterm": "234" },
-  \   "dark_yellow": { "gui": "#e1e1e1", "cterm": "234" },
-  \   "red": { "gui": "#e1e1e1", "cterm": "234" },
-  \   "green": { "gui": "#00C379", "cterm": "29" },
-  \   "comment_grey": { "gui": "#00C379", "cterm": "246" },
-  \   "menu_grey": { "gui": "#00C379", "cterm": "246" },
-  \   "black": { "gui": "#00C379", "cterm": "246" },
-  \   "visual_grey": { "gui": "#00C379", "cterm": "234" },
-  \   "visual_black": { "gui": "#00C379", "cterm": "252" }
-  \}
-
   syntax on
-  colorscheme onedark
+  colorscheme chavescheme
 
   filetype plugin indent on
-  highlight Normal ctermbg=none
 " }}}
