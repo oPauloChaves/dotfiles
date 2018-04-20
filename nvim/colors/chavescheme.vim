@@ -25,7 +25,8 @@ hi SpecialKey ctermfg=188 ctermbg=66 cterm=bold guifg=#cbd7dc guibg=#5e99b1 gui=
 hi NonText ctermfg=247 ctermbg=254 cterm=none guifg=#929cad guibg=#e7e5e2 gui=none
 hi MatchParen ctermfg=132 ctermbg=none cterm=bold guifg=#aa586e guibg=none gui=bold
 hi Comment ctermfg=245 cterm=none guifg=#929cad gui=none
-hi Constant ctermfg=29 ctermbg=none cterm=none guifg=#608f8e guibg=#cfd9d9 gui=none
+hi Constant ctermfg=24 ctermbg=none cterm=none guifg=#608f8e guibg=#cfd9d9 gui=none
+hi String ctermfg=29 ctermbg=none cterm=none guifg=#608f8e guibg=#cfd9d9 gui=none
 hi Number ctermfg=237 ctermbg=none cterm=none guifg=#5e99b1 guibg=#cbd7dc gui=none
 hi Identifier ctermfg=59 cterm=none guifg=#555f6f gui=bold
 hi Function ctermfg=237 cterm=none guifg=#555f6f gui=bold
@@ -71,6 +72,5 @@ hi WarningMsg ctermfg=132 cterm=none guifg=#aa586e gui=none
 hi WildMenu ctermfg=59 ctermbg=247 cterm=bold guifg=#555f6f guibg=#929cad gui=bold
 hi ColorColumn ctermfg=none ctermbg=181 cterm=none
 
-hi link String Constant
 hi link htmlTag htmlTagName
 hi link htmlEndTag htmlTagName
