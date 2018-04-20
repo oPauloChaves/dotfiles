@@ -38,9 +38,23 @@ call plug#begin('~/.config/nvim/plugged')
   " mouse support
   set mouse=a
 
+" Search on the oposite of the file when reaching end/beginning
+set wrapscan
+
+" Ignore case when searching (unless using capital letters)
+set ignorecase
+set smartcase
+
+" use forward slash
+set shellslash
+
+" Height of command line
+set ch=1
+
+" No beeping
+set visualbell
+
   " Searching
-  set ignorecase                       " case insensitive searching
-  set smartcase                        " case-sensitive if expresson contains a capital letter
   set hlsearch                         " highlight search results
   set incsearch                        " set incremental search, like modern browsers
   set nolazyredraw                     " don't redraw while executing macros
@@ -49,7 +63,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   " error bells
   set noerrorbells
-  set visualbell
   set t_vb=
   set tm=500
 
@@ -66,17 +79,21 @@ call plug#begin('~/.config/nvim/plugged')
   set diffopt+=vertical
   set laststatus=2          " show the satus line all the time
   set so=7                  " set 7 lines to the cursors - when moving vertical
-  set wildmenu              " enhanced command line completion
   set hidden                " current buffer can be put into background
   set showcmd               " show incomplete commands
   set noshowmode            " don't show which mode disabled for PowerLine
-  set wildmode=list:longest " complete files like a shell
   set scrolloff=3           " lines of text around cursor
   set shell=$SHELL
   set cmdheight=1           " command bar height
   set title                 " set terminal title
   set showmatch             " show matching braces
   set mat=2                 " how many tenths of a second to blink
+
+" Better command line completion
+set wildmenu
+
+" Complete files like a shell
+set wildmode=list:longest,list:full
 
   " Tab control
   set noexpandtab " insert tabs rather than spaces for <Tab>
@@ -86,12 +103,18 @@ call plug#begin('~/.config/nvim/plugged')
   set shiftwidth=4 " number of spaces to use for indent and unindent
   set shiftround " round indent to a multiple of 'shiftwidth'
 
-  " code folding settings
-  set foldmethod=syntax " fold based on indent
-  set foldlevelstart=99
-  set foldnestmax=10 " deepest fold is 10 levels
-  set nofoldenable " don't fold by default
-  set foldlevel=1
+" Timeout for waiting after pressing <leader>
+set timeoutlen=500
+
+" Fold the code
+set foldenable
+
+" Don’t show the foldcolumn
+set foldcolumn=0
+
+" Default fold is marker
+set foldmethod=marker
+set foldlevelstart=20
 
   " toggle invisible characters
   set list
@@ -258,27 +281,10 @@ call plug#begin('~/.config/nvim/plugged')
 " }}}
 
 " General Functionality {{{
-  " YCM {{{
-    " https://github.com/Valloric/YouCompleteMe/issues/1751
-    function! BuildYCM(info)
-      if a:info.status == 'installed' || a:info.force
-        !./install.py --js-completer
-      endif
-    endfunction
-
-    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-    let g:ycm_autoclose_preview_window_after_insertion = 1
-    let g:ycm_key_invoke_completion = '<C-Space>'
-    let g:ycm_filetype_specific_completion_to_disable = {
-    \ 'ruby': 1
-    \}
-
-
   " UltiSnips {{{
     Plug 'SirVer/ultisnips' " Snippets plugin
     Plug 'honza/vim-snippets'
     Plug 'epilande/vim-react-snippets' " React.js snippets
-    let g:UltiSnipsExpandTrigger="<c-j>"
   " }}}
 
   " Relative number {{{

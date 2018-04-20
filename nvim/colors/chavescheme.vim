@@ -6,7 +6,7 @@ let g:colors_name = "chavescheme"
 
 set background=light
 
-hi Normal ctermfg=236 ctermbg=254 guifg=#697383 guibg=#f1f1f1
+hi Normal ctermfg=235 ctermbg=254 guifg=#697383 guibg=#f1f1f1
 hi Cursor ctermfg=none ctermbg=59 cterm=none guifg=none guibg=#555f6f gui=none
 hi CursorIM ctermfg=none ctermbg=59 guifg=none guibg=#555f6f
 hi CursorLine ctermfg=none ctermbg=188 cterm=bold guifg=none guibg=#dfddd7 gui=bold
@@ -34,17 +34,17 @@ hi Operator ctermfg=132 cterm=none guifg=#a05b89 gui=none
 hi Include ctermfg=25 cterm=none guifg=#7c6a93 gui=none
 hi PreProc ctermfg=25 cterm=none guifg=#9784ae gui=none
 hi Type ctermfg=236 cterm=none guifg=#a05b89 gui=none
-hi StorageClass ctermfg=24 cterm=bold guifg=#56759a gui=bold
+hi StorageClass ctermfg=24 cterm=none guifg=#56759a gui=bold
 hi Structure ctermfg=132 cterm=none guifg=#a05b89 gui=none
-hi Typedef ctermfg=24 cterm=bold guifg=#56759a gui=bold
-hi Special ctermfg=67 ctermbg=none cterm=bold guifg=#7593bb guibg=none gui=bold
+hi Typedef ctermfg=24 cterm=none guifg=#56759a gui=bold
+hi Special ctermfg=25 ctermbg=none cterm=none guifg=#7593bb guibg=none gui=bold
 hi Underlined cterm=underline guifg=fg gui=underline
 hi Ignore guifg=bg
 hi Error ctermfg=132 ctermbg=181 cterm=bold guifg=#aa586e guibg=#edb8c4 gui=bold
-hi Todo ctermfg=243 ctermbg=254 cterm=bold guifg=#697383 guibg=#e7e5e2 gui=bold
+hi Todo ctermfg=245 ctermbg=254 cterm=bold guifg=#697383 guibg=#e7e5e2 gui=bold
 hi IncSearch ctermfg=254 ctermbg=66 cterm=bold guifg=#e7e5e2 guibg=#5e99b1 gui=bold
 hi Search ctermfg=none ctermbg=186 cterm=none guifg=#e7e5e2 guibg=#447487 gui=none
-hi Pmenu ctermfg=243 ctermbg=251 cterm=none guifg=#697383 guibg=#d3d1cc gui=none
+hi Pmenu ctermfg=213 ctermbg=251 cterm=none guifg=#697383 guibg=#d3d1cc gui=none
 hi PmenuSel ctermfg=59 ctermbg=145 cterm=bold guifg=#555f6f guibg=#bdbbb6 gui=bold
 hi PmenuSbar ctermbg=188 cterm=none guibg=#dfddd7 gui=none
 hi PmenuThumb ctermbg=247 cterm=none guibg=#929cad gui=none
@@ -69,6 +69,8 @@ hi ModeMsg cterm=bold gui=bold
 hi Question cterm=none guifg=fg gui=none
 hi WarningMsg ctermfg=132 cterm=none guifg=#aa586e gui=none
 hi WildMenu ctermfg=59 ctermbg=247 cterm=bold guifg=#555f6f guibg=#929cad gui=bold
-hi ColorColumn ctermfg=none ctermbg=181 cterm=none guifg=none guibg=#edb8c4 gui=none
+hi ColorColumn ctermfg=none ctermbg=181 cterm=none
 
 hi link String Constant
+hi link htmlTag htmlTagName
+hi link htmlEndTag htmlTagName
