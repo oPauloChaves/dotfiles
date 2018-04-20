@@ -45,8 +45,8 @@ hi Error ctermfg=132 ctermbg=181 cterm=bold guifg=#aa586e guibg=#edb8c4 gui=bold
 hi Todo ctermfg=245 ctermbg=254 cterm=bold guifg=#697383 guibg=#e7e5e2 gui=bold
 hi IncSearch ctermfg=254 ctermbg=66 cterm=bold guifg=#e7e5e2 guibg=#5e99b1 gui=bold
 hi Search ctermfg=none ctermbg=186 cterm=none guifg=#e7e5e2 guibg=#447487 gui=none
-hi Pmenu ctermfg=213 ctermbg=251 cterm=none guifg=#697383 guibg=#d3d1cc gui=none
-hi PmenuSel ctermfg=59 ctermbg=145 cterm=bold guifg=#555f6f guibg=#bdbbb6 gui=bold
+hi Pmenu ctermfg=237 ctermbg=251 cterm=none guifg=#697383 guibg=#d3d1cc gui=none
+hi PmenuSel ctermfg=none ctermbg=145 cterm=none guifg=#555f6f guibg=#bdbbb6 gui=bold
 hi PmenuSbar ctermbg=188 cterm=none guibg=#dfddd7 gui=none
 hi PmenuThumb ctermbg=247 cterm=none guibg=#929cad gui=none
 hi TabLine ctermfg=243 ctermbg=254 cterm=none guifg=#697383 guibg=#e7e5e2 gui=none

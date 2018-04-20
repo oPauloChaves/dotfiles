@@ -281,10 +281,27 @@ set foldlevelstart=20
 " }}}
 
 " General Functionality {{{
+  " YCM {{{
+    " https://github.com/Valloric/YouCompleteMe/issues/1751
+    function! BuildYCM(info)
+      if a:info.status == 'installed' || a:info.force
+        !./install.py --js-completer
+      endif
+    endfunction
+
+    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+    let g:ycm_autoclose_preview_window_after_insertion = 1
+    let g:ycm_key_invoke_completion = '<C-Space>'
+    let g:ycm_filetype_specific_completion_to_disable = {
+    \ 'ruby': 1
+    \}
+
+
   " UltiSnips {{{
     Plug 'SirVer/ultisnips' " Snippets plugin
     Plug 'honza/vim-snippets'
     Plug 'epilande/vim-react-snippets' " React.js snippets
+    let g:UltiSnipsExpandTrigger="<c-j>"
   " }}}
 
   " Relative number {{{
