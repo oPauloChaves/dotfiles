@@ -32,6 +32,12 @@ alias l='ls -CF'
 
 # User specific aliases and functions
 
+alias lu="cd $HOME/lucidity"
+
+# tmux: kill all detached sessions
+alias tmux-ls-sessions="tmux list-sessions"
+alias tmux-kill-detached="tmux list-sessions | grep -v attached | cut -d: -f1 |  xargs -t -n1 tmux kill-session -t"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -39,9 +45,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # Install fd: https://github.com/sharkdp/fd
 # follow symbolic links and don't exclude hidden files
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+# export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 # To apply the command to CTRL-T as well
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases

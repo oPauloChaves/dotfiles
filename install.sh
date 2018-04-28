@@ -4,9 +4,9 @@ if [ -f "$HOME/.bashrc" ]; then
     mv "$HOME/.bashrc" "$HOME/.old-bashrc"
 fi
 
-if [ -f "$HOME/.zshrc" ]; then
-    mv "$HOME/.zshrc" "$HOME/.old-zshrc"
-fi
+# if [ -f "$HOME/.zshrc" ]; then
+#     mv "$HOME/.zshrc" "$HOME/.old-zshrc"
+# fi
 
 if [ -f "$HOME/.profile" ]; then
     mv "$HOME/.profile" "$HOME/.old-profile"
@@ -31,7 +31,7 @@ else
 fi
 
 ln -s "$HOME/dotfiles/.bashrc" "$HOME/.bashrc"
-ln -s "$HOME/dotfiles/.zshrc" "$HOME/.zshrc"
+# ln -s "$HOME/dotfiles/.zshrc" "$HOME/.zshrc"
 ln -s "$HOME/dotfiles/.profile" "$HOME/.profile"
 ln -s "$HOME/dotfiles/.inputrc" "$HOME/.inputrc"
 ln -s "$HOME/dotfiles/.tern-config" "$HOME/.tern-config"
