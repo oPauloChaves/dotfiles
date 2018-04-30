@@ -1,4 +1,3 @@
 *.log
 
-nvim/plugged
 nvim/autoload/plug.vim
