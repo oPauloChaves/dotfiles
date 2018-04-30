@@ -4,73 +4,26 @@ set nocompatible                            " disable vi compatibility
 call functions#PlugLoad()
 call plug#begin('~/.config/nvim/plugged')
 
-" General Mappings {{{
-" set a map leader for more key combos
-let mapleader = ','
-
-" Map : to ; (to avoid using SHIFT)
-nnoremap ; :
-
-" shortcut to save
-nmap <leader>, :w<cr>
-
-" Quick toggle between buffers
-noremap <leader>j :b#<CR>
-
-"" Tab navigation
-noremap <leader>w :tabnext<CR>
-noremap <leader>q :tabprevious<CR>
-noremap <leader>t :tabnew<CR>
-
-"" Buffer navigation
-noremap <leader>z :bp<CR>
-noremap <leader>x :bn<CR>
-" noremap <leader>d :bd<CR>
-
-" Delete all buffers
-nnoremap <silent> <leader>da :exec "1," . bufnr('$') . "bd"<CR>
-
-"" Switching windows
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-noremap <C-h> <C-w>h
-
-"" Clean search (highlight)
-nnoremap <silent> <leader><space> :noh<cr>
-
-"" Vmap for maintain Visual Mode after shifting > and <
-" vmap < <gv
-" vmap > >gv
-
-" Indentation in VISUAL Mode like in INSERT Mode
-vnoremap > >gv
-vnoremap < <gv
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
-
-"" Move visual block
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-"" Split open buffer
-noremap <Leader>h :sb
-noremap <Leader>v :vert sb
-
-" Quickly open/reload vim
-nnoremap <leader>ev :e! ~/.config/nvim/init.vim<CR>
-nnoremap <leader>er :source ~/.config/nvim/init.vim<CR>
-
-" Toogle `set list`
-nnoremap <leader>l :set list!<CR>
-
-" Indent the whole source code
-nnoremap <leader>ii gg=G
-" }}}
-
+Plug 'editorconfig/editorconfig-vim'
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'tpope/vim-fugitive'
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+Plug 'w0rp/ale' " Asynchonous linting engine
+Plug 'tpope/vim-endwise', { 'for': [ 'ruby', 'bash', 'zsh', 'sh' ]}
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx', 'eruby' ]}
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'jiangmiao/auto-pairs'
+Plug 'wincent/ferret'
+Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'epilande/vim-react-snippets' " React.js snippets
 Plug 'itchyny/lightline.vim'
 Plug 'rakr/vim-one'
-
 
 " YCM {{{
 " https://github.com/Valloric/YouCompleteMe/issues/1751
@@ -81,140 +34,6 @@ function! BuildYCM(info)
 endfunction
 
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_filetype_specific_completion_to_disable = {
-\ 'ruby': 1
-\}
-
-" UltiSnips {{{
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'epilande/vim-react-snippets' " React.js snippets
-let g:UltiSnipsExpandTrigger="<c-j>"
-" }}}
-
-" FZF {{{
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
-let g:fzf_layout = { 'down': '~25%' }
-
-if isdirectory(".git")
-  " if in a git project, use :GFiles
-  nmap <silent> <leader>f :GFiles --cached --others --exclude-standard<cr>
-else
-  " otherwise, use :FZF
-  nmap <silent> <leader>f :FZF<cr>
-endif
-
-" Display available mappings
-nmap <silent> <leader>b :Buffers<cr>
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-" }}}
-
-" {{{
-Plug 'sheerun/vim-polyglot'
-let g:polyglot_disabled = ['ruby']
-" }}}
-
-" search inside files using ripgrep. This plugin provides an Ack command.
-Plug 'wincent/ferret'
-
-" insert or delete brackets, parens, quotes in pair
-Plug 'jiangmiao/auto-pairs'
-
-" easy commenting motions
-Plug 'tpope/vim-commentary'
-
-" mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
-Plug 'tpope/vim-surround'
-
-" .editorconfig support
-Plug 'editorconfig/editorconfig-vim'
-
-" NERDTree {{{
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-
-" Toggle NERDTree
-function! ToggleNerdTree()
-  if @% != "" && (!exists("g:NERDTree") || (g:NERDTree.ExistsForTab() && !g:NERDTree.IsOpen()))
-    :NERDTreeFind
-  else
-    :NERDTreeToggle
-  endif
-endfunction
-" toggle nerd tree
-nmap <silent> <leader>k :call ToggleNerdTree()<cr>
-" find the current file in nerdtree without needing to reload the drawer
-nmap <silent> <leader>y :NERDTreeFind<cr>
-
-let NERDTreeShowHidden=1
-" }}}
-
-" vim-fugitive {{{
-Plug 'tpope/vim-fugitive'
-nmap <silent> <leader>gs :Gstatus<cr>
-nmap <leader>ge :Gedit<cr>
-nmap <silent><leader>gr :Gread<cr>
-nmap <silent><leader>gb :Gblame<cr>
-" }}}
-
-" ALE {{{
-Plug 'w0rp/ale' " Asynchonous linting engine
-let g:ale_change_sign_column_color = 0
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
-
-let g:ale_linters = {
-\ 'javascript': ['eslint'],
-\ 'typescript': ['tsserver', 'tslint'],
-\ 'ruby': ['rubocop'],
-\ 'html': []
-\}
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_fix_on_save = 0
-" }}}
-
-" Prettier {{{
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-let g:prettier#exec_cmd_async = 1
-let g:prettier#autoformat = 0
-nnoremap <Leader>p :Prettier<CR>
-" }}}
-
-" Language-Specific Configuration {{{
-" html / templates {{{
-  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
-
-  " emmet support for vim - easily create markdup wth CSS-like syntax
-  Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx', 'eruby' ]}
-  let g:user_emmet_settings = {
-  \  'javascript.jsx': {
-  \    'extends': 'jsx',
-  \  },
-  \}
-  let g:user_emmet_leader_key='<C-E>'
-" }}}
-
-" JSON {{{
-  Plug 'elzr/vim-json', { 'for': 'json' }
-  let g:vim_json_syntax_conceal = 0
-" }}}
-
-Plug 'tpope/vim-endwise', { 'for': [ 'ruby', 'bash', 'zsh', 'sh' ]}
-" }}}
 
 call plug#end()
 
@@ -291,6 +110,70 @@ set ttyfast                          " make laggy connections work faster
 set timeoutlen=500
 " }}}
 
+" General Mappings {{{
+" set a map leader for more key combos
+let mapleader = ','
+
+" Map : to ; (to avoid using SHIFT)
+nnoremap ; :
+
+" shortcut to save
+nmap <leader>, :w<cr>
+
+" Quick toggle between buffers
+noremap <leader>j :b#<CR>
+
+"" Tab navigation
+noremap <leader>w :tabnext<CR>
+noremap <leader>q :tabprevious<CR>
+noremap <leader>t :tabnew<CR>
+
+"" Buffer navigation
+noremap <leader>z :bp<CR>
+noremap <leader>x :bn<CR>
+" noremap <leader>d :bd<CR>
+
+" Delete all buffers
+nnoremap <silent> <leader>da :exec "1," . bufnr('$') . "bd"<CR>
+
+"" Switching windows
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+
+"" Clean search (highlight)
+nnoremap <silent> <leader><space> :noh<cr>
+
+"" Vmap for maintain Visual Mode after shifting > and <
+" vmap < <gv
+" vmap > >gv
+
+" Indentation in VISUAL Mode like in INSERT Mode
+vnoremap > >gv
+vnoremap < <gv
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+"" Move visual block
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+"" Split open buffer
+noremap <Leader>h :sb
+noremap <Leader>v :vert sb
+
+" Quickly open/reload vim
+nnoremap <leader>ev :e! ~/.config/nvim/init.vim<CR>
+nnoremap <leader>er :source ~/.config/nvim/init.vim<CR>
+
+" Toogle `set list`
+nnoremap <leader>l :set list!<CR>
+
+" Indent the whole source code
+nnoremap <leader>ii gg=G
+" }}}
+
 " Appearance {{{
 " Don’t break lines
 set textwidth=0
@@ -344,7 +227,6 @@ noremap } }zzzv
 noremap { {zzzv
 " }}}
 
-
 " Autocmd Rules {{{
 " Remove unwanted whitespace when saving
 autocmd BufWritePre * silent! %s/\s\+$//e
@@ -360,7 +242,115 @@ augroup vimrc-remember-cursor-position
   autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
+
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
 " }}}
+
+"" ############################## Plugin Config ###############################
+
+" vim-polyglot {{{
+let g:polyglot_disabled = ['ruby']
+" }}}
+
+" NERDTree {{{
+" Toggle NERDTree
+function! ToggleNerdTree()
+  if @% != "" && (!exists("g:NERDTree") || (g:NERDTree.ExistsForTab() && !g:NERDTree.IsOpen()))
+    :NERDTreeFind
+  else
+    :NERDTreeToggle
+  endif
+endfunction
+" toggle nerd tree
+nmap <silent> <leader>k :call ToggleNerdTree()<cr>
+" find the current file in nerdtree without needing to reload the drawer
+nmap <silent> <leader>y :NERDTreeFind<cr>
+
+let NERDTreeShowHidden=1
+" }}}
+
+" vim-fugitive {{{
+nmap <silent> <leader>gs :Gstatus<cr>
+nmap <leader>ge :Gedit<cr>
+nmap <silent><leader>gr :Gread<cr>
+nmap <silent><leader>gb :Gblame<cr>
+" }}}
+
+" ALE {{{
+let g:ale_change_sign_column_color = 0
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+
+let g:ale_linters = {
+\ 'javascript': ['eslint'],
+\ 'typescript': ['tsserver', 'tslint'],
+\ 'ruby': ['rubocop'],
+\ 'html': []
+\}
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_fix_on_save = 0
+" }}}
+
+" Prettier {{{
+let g:prettier#exec_cmd_async = 1
+let g:prettier#autoformat = 0
+nnoremap <Leader>p :Prettier<CR>
+" }}}
+
+" JSON {{{
+let g:vim_json_syntax_conceal = 0
+" }}}
+
+" emmet {{{
+let g:user_emmet_settings = {
+\  'javascript.jsx': {
+\    'extends': 'jsx',
+\  },
+\}
+let g:user_emmet_leader_key='<C-E>'
+" }}}
+
+" FZF {{{
+let g:fzf_layout = { 'down': '~25%' }
+
+if isdirectory(".git")
+  " if in a git project, use :GFiles
+  nmap <silent> <leader>f :GFiles --cached --others --exclude-standard<cr>
+else
+  " otherwise, use :FZF
+  nmap <silent> <leader>f :FZF<cr>
+endif
+
+" Display available mappings
+nmap <silent> <leader>b :Buffers<cr>
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+" }}}
+
+" UltiSnips {{{
+let g:UltiSnipsExpandTrigger="<c-j>"
+" }}}
+
+" YCM {{{
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_filetype_specific_completion_to_disable = {
+\ 'ruby': 1
+\}
+" }}}
+
+"" ############################## Colorsche Config ############################
 
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 
