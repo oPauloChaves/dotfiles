@@ -382,6 +382,10 @@ if (empty($TMUX))
 endif
 
 " Colorscheme
-set background=dark " for the dark version
-let g:one_allow_italics = 1 " I love italic for comments
-colorscheme one
+set background=light
+let g:one_allow_italics = 1
+colorscheme github
+
+" set background=dark
+" let g:one_allow_italics = 1
+" colorscheme one
