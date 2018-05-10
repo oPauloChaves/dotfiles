@@ -131,7 +131,7 @@ noremap <leader>t :tabnew<CR>
 "" Buffer navigation
 noremap <leader>z :bp<CR>
 noremap <leader>x :bn<CR>
-" noremap <leader>d :bd<CR>
+noremap <leader>c :bd<CR>
 
 " Delete all buffers
 nnoremap <silent> <leader>da :exec "1," . bufnr('$') . "bd"<CR>
