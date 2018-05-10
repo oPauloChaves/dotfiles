@@ -191,6 +191,14 @@ set title                 " set terminal title
 set showmatch             " show matching braces
 set mat=2                 " how many tenths of a second to blink
 
+" Tab control
+set noexpandtab " insert tabs rather than spaces for <Tab>
+set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
+set tabstop=4 " the visible width of tabs
+set softtabstop=4 " edit as if the tabs are 4 characters wide
+set shiftwidth=4 " number of spaces to use for indent and unindent
+set shiftround " round indent to a multiple of 'shiftwidth'
+
 " Ignore whitespace in DIFFs
 set diffopt+=iwhite
 
@@ -389,3 +397,87 @@ colorscheme github
 " set background=dark
 " let g:one_allow_italics = 1
 " colorscheme one
+
+" LightLine {{{
+let g:lightline = {
+\ 'active': {
+\   'left': [ [ 'mode', 'paste' ],
+\       [ 'gitbranch' ],
+\       [ 'readonly', 'filetype', 'filename' ]],
+\   'right': [ [ 'percent' ], [ 'lineinfo' ],
+\       [ 'fileformat', 'fileencoding' ],
+\       [ 'linter_errors', 'linter_warnings' ]]
+\ },
+\ 'component_expand': {
+\   'linter': 'LightlineLinter',
+\   'linter_warnings': 'LightlineLinterWarnings',
+\   'linter_errors': 'LightlineLinterErrors',
+\   'linter_ok': 'LightlineLinterOk'
+\ },
+\ 'component_type': {
+\   'readonly': 'error',
+\   'linter_warnings': 'warning',
+\   'linter_errors': 'error'
+\ },
+\ 'component_function': {
+\   'fileencoding': 'LightlineFileEncoding',
+\   'filename': 'LightlineFileName',
+\   'gitbranch': 'LightlineGitBranch'
+\ },
+\ 'tabline': {
+\   'left': [ [ 'tabs' ] ],
+\   'right': [ [ 'close' ] ]
+\ },
+\ 'tab': {
+\   'active': [ 'filename', 'modified' ],
+\   'inactive': [ 'filename', 'modified' ],
+\ },
+\ 'separator': { 'left': '', 'right': '' },
+\ 'subseparator': { 'left': '', 'right': '' }
+\ }
+
+function! LightlineFileName() abort
+  let filename = winwidth(0) > 70 ? expand('%') : expand('%:t')
+  if filename =~ 'NERD_tree'
+    return ''
+  endif
+  let modified = &modified ? ' +' : ''
+  return filename . modified
+endfunction
+
+function! LightlineFileEncoding()
+  " only show the file encoding if it's not 'utf-8'
+  return &fileencoding == 'utf-8' ? '' : &fileencoding
+endfunction
+
+function! LightlineLinter() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  return l:counts.total == 0 ? '' : printf('×%d', l:counts.total)
+endfunction
+
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : '⚠ ' . printf('%d', all_non_errors)
+endfunction
+
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  return l:counts.total == 0 ? '' : '✖ ' . printf('%d', all_errors)
+endfunction
+
+function! LightlineLinterOk() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  return l:counts.total == 0 ? 'OK' : ''
+endfunction
+
+function! LightlineGitBranch()
+  return '' . (exists('*fugitive#head') ? fugitive#head() : '')
+endfunction
+
+augroup alestatus
+  autocmd User ALELint call lightline#update()
+augroup end
+" }}}
