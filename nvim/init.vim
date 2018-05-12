@@ -24,6 +24,12 @@ Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets' " React.js snippets
 Plug 'itchyny/lightline.vim'
 Plug 'rakr/vim-one'
+Plug 'Yggdroot/indentLine'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+"" Vim-Session
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 
 " YCM {{{
 " https://github.com/Valloric/YouCompleteMe/issues/1751
@@ -256,6 +262,26 @@ autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
 " }}}
 
 "" ############################## Plugin Config ###############################
+
+" vim-session {{{
+let g:session_directory = "~/.config/nvim/session"
+let g:session_autoload = "no"
+let g:session_autosave = "no"
+let g:session_command_aliases = 1
+
+nnoremap <leader>so :OpenSession<Space>
+nnoremap <leader>ss :SaveSession<Space>
+nnoremap <leader>sd :DeleteSession<CR>
+nnoremap <leader>sc :CloseSession<CR>
+" }}}
+
+" indentLine {{{
+let g:indentLine_enabled = 1
+let g:indentLine_concealcursor = 0
+let g:indentLine_char = '┆'
+let g:indentLine_color_gui = '#dadada'
+let g:indentLine_faster = 1
+" }}}
 
 " vim-polyglot {{{
 let g:polyglot_disabled = ['ruby']
