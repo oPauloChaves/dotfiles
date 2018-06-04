@@ -151,10 +151,6 @@ noremap <C-h> <C-w>h
 "" Clean search (highlight)
 nnoremap <silent> <leader><space> :noh<cr>
 
-"" Vmap for maintain Visual Mode after shifting > and <
-" vmap < <gv
-" vmap > >gv
-
 " Indentation in VISUAL Mode like in INSERT Mode
 vnoremap > >gv
 vnoremap < <gv
@@ -204,9 +200,6 @@ set tabstop=4 " the visible width of tabs
 set softtabstop=4 " edit as if the tabs are 4 characters wide
 set shiftwidth=4 " number of spaces to use for indent and unindent
 set shiftround " round indent to a multiple of 'shiftwidth'
-
-" Ignore whitespace in DIFFs
-set diffopt+=iwhite
 
 " Highlight line with cursor
 set cursorline
