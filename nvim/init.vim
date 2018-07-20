@@ -272,7 +272,7 @@ nnoremap <leader>sc :CloseSession<CR>
 let g:indentLine_enabled = 1
 let g:indentLine_concealcursor = 0
 let g:indentLine_char = '┆'
-let g:indentLine_color_gui = '#dadada'
+" let g:indentLine_color_gui = '#dadada'
 let g:indentLine_faster = 1
 " }}}
 
@@ -408,14 +408,23 @@ if (empty($TMUX))
   endif
 endif
 
-" Colorscheme
-set background=light
-let g:one_allow_italics = 1
-colorscheme github
+function SetWhiteBG()
+  let g:indentLine_color_gui = '#dadada'
+  set background=light
+  colorscheme github
+endfunction
 
-" set background=dark
-" let g:one_allow_italics = 1
-" colorscheme one
+function SetBlackBG()
+  let g:indentLine_color_gui = '#2b3033'
+  set background=dark
+  let g:one_allow_italics = 1
+  colorscheme one
+endfunction
+
+call SetWhiteBG()
+
+nmap <silent><leader>zb :call SetBlackBG()<cr>
+nmap <silent><leader>zw :call SetWhiteBG()<cr>
 
 " LightLine {{{
 let g:lightline = {
