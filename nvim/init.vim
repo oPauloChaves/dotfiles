@@ -179,6 +179,7 @@ nnoremap <leader>ii gg=G
 " Appearance {{{
 " Don’t break lines
 set textwidth=0
+set nowrap
 
 set number                " show line numbers
 set autoindent            " automatically set indent of new line
