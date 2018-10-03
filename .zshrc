@@ -94,7 +94,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias lc="cd ~/lucidity"
+
+export EDITOR=vim
+
+source $HOME/code/iwork/lucidity/config/alias.zsh
+source $HOME/code/iwork/zsh/alias.zsh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

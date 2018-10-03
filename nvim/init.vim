@@ -10,7 +10,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 Plug 'w0rp/ale' " Asynchonous linting engine
 Plug 'tpope/vim-endwise', { 'for': [ 'ruby', 'bash', 'zsh', 'sh' ]}
-Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx', 'eruby' ]}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -30,16 +29,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 "" Vim-Session
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-
-" YCM {{{
-" https://github.com/Valloric/YouCompleteMe/issues/1751
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --js-completer
-  endif
-endfunction
-
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
 call plug#end()
 
@@ -239,12 +228,6 @@ noremap { {zzzv
 " Remove unwanted whitespace when saving
 autocmd BufWritePre * silent! %s/\s\+$//e
 
-"" The PC is fast enough, do syntax highlight syncing from start unless 300 lines
-augroup vimrc-sync-fromstart
-  autocmd!
-  autocmd BufEnter * :syntax sync maxlines=300
-augroup END
-
 "" Remember cursor position
 augroup vimrc-remember-cursor-position
   autocmd!
@@ -278,7 +261,7 @@ let g:indentLine_faster = 1
 " }}}
 
 " vim-polyglot {{{
-let g:polyglot_disabled = ['ruby']
+" let g:polyglot_disabled = ['ruby']
 " }}}
 
 " NERDTree {{{
@@ -300,8 +283,6 @@ let NERDTreeShowHidden=1
 
 " vim-fugitive {{{
 nmap <silent> <leader>gs :Gstatus<cr>
-nmap <leader>ge :Gedit<cr>
-nmap <silent><leader>gr :Gread<cr>
 nmap <silent><leader>gb :Gblame<cr>
 " }}}
 
@@ -313,7 +294,6 @@ let g:ale_sign_warning = '⚠'
 
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
-\ 'typescript': ['tsserver', 'tslint'],
 \ 'ruby': ['rubocop'],
 \ 'html': []
 \}
@@ -355,27 +335,11 @@ endif
 
 " Display available mappings
 nmap <silent> <leader>b :Buffers<cr>
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
 
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
 " }}}
 
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger="<c-j>"
-" }}}
-
-" YCM {{{
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_filetype_specific_completion_to_disable = {
-\ 'ruby': 1
-\}
 " }}}
 
 "" ############################## Colorsche Config ############################
@@ -392,21 +356,8 @@ endif
 " Syntax highlighting
 syntax on
 
-"Credit joshdick
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
+if (has("termguicolors"))
+  set termguicolors
 endif
 
 function SetWhiteBG()
@@ -503,10 +454,11 @@ function! LightlineLinterOk() abort
 endfunction
 
 function! LightlineGitBranch()
-  return '' . (exists('*fugitive#head') ? fugitive#head() : '')
+  return ' ' . (exists('*fugitive#head') ? fugitive#head() : '')
 endfunction
 
 augroup alestatus
   autocmd User ALELint call lightline#update()
 augroup end
 " }}}
+
