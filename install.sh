@@ -1,33 +1,33 @@
 #!/bin/bash
 
 if [ -f "$HOME/.bashrc" ]; then
-    mv "$HOME/.bashrc" "$HOME/.old-bashrc"
+  mv "$HOME/.bashrc" "$HOME/.old-bashrc"
 fi
 
 if [ -f "$HOME/.zshrc" ]; then
-    mv "$HOME/.zshrc" "$HOME/.old-zshrc"
+  mv "$HOME/.zshrc" "$HOME/.old-zshrc"
 fi
 
 if [ -f "$HOME/.profile" ]; then
-    mv "$HOME/.profile" "$HOME/.old-profile"
+  mv "$HOME/.profile" "$HOME/.old-profile"
 fi
 
 if [ -f "$HOME/.tern-config" ]; then
-    mv "$HOME/.tern-config" "$HOME/.old-tern-config"
+  mv "$HOME/.tern-config" "$HOME/.old-tern-config"
 fi
 
 if [ -f "$HOME/.tmux.conf" ]; then
-    mv "$HOME/.tmux.conf" "$HOME/.old-tmux.conf"
+  mv "$HOME/.tmux.conf" "$HOME/.old-tmux.conf"
 fi
 
 if [ -f "$HOME/.inputrc" ]; then
-    mv "$HOME/.inputrc" "$HOME/.old-inputrc"
+  mv "$HOME/.inputrc" "$HOME/.old-inputrc"
 fi
 
 if [ ! -s "$HOME/.config/nvim" ]; then
-    mkdir "$HOME/.config/nvim"
+  mkdir "$HOME/.config/nvim"
 else
-    [[ -s "$HOME/.config/nvim/init.vim" ]] && mv "$HOME/.config/nvim/init.vim" "$HOME/.config/nvim/old-init.vim"
+  [[ -s "$HOME/.config/nvim/init.vim" ]] && mv "$HOME/.config/nvim/init.vim" "$HOME/.config/nvim/old-init.vim"
 fi
 
 ln -s "$HOME/code/dotfiles/.bashrc" "$HOME/.bashrc"
@@ -43,6 +43,6 @@ ln -s "$HOME/code/dotfiles/nvim/colors" "$HOME/.config/nvim/colors"
 ln -s "$HOME/code/dotfiles/nvim/ftdetect" "$HOME/.config/nvim/ftdetect"
 ln -s "$HOME/code/dotfiles/nvim/UltiSnips" "$HOME/.config/nvim/UltiSnips"
 
-# ln -s "$HOME/dotfiles/tmux/tmux.conf" "$HOME/.tmux.conf"
+ln -s "$HOME/code/dotfiles/tmux/tmux.conf" "$HOME/.tmux.conf"
 
 echo "Setup done"
