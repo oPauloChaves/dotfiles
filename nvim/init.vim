@@ -7,7 +7,11 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-fugitive'
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
+
 Plug 'w0rp/ale' " Asynchonous linting engine
 Plug 'tpope/vim-endwise', { 'for': [ 'ruby', 'bash', 'zsh', 'sh' ]}
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx', 'eruby' ]}
@@ -15,7 +19,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'wincent/ferret'
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sheerun/vim-polyglot'
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
@@ -24,15 +31,28 @@ Plug 'epilande/vim-react-snippets' " React.js snippets
 Plug 'itchyny/lightline.vim'
 Plug 'rakr/vim-one'
 Plug 'Yggdroot/indentLine'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 "" Vim-Session
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
+" YCM {{{
+" https://github.com/Valloric/YouCompleteMe/issues/1751
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --js-completer
+  endif
+endfunction
+
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+
 call plug#end()
 
 filetype plugin indent on
+
+" vim-polyglot {{{
+let g:polyglot_disabled = ['ruby']
+" }}}
 
 " General {{{
 "" Encoding
@@ -260,9 +280,6 @@ let g:indentLine_char = '┆'
 let g:indentLine_faster = 1
 " }}}
 
-" vim-polyglot {{{
-" let g:polyglot_disabled = ['ruby']
-" }}}
 
 " NERDTree {{{
 " Toggle NERDTree
@@ -340,6 +357,14 @@ nmap <silent> <leader>b :Buffers<cr>
 
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger="<c-j>"
+" }}}
+
+" YCM {{{
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:ycm_key_invoke_completion = '<C-Space>'
+" let g:ycm_filetype_specific_completion_to_disable = {
+" \ 'ruby': 1
+" \}
 " }}}
 
 "" ############################## Colorsche Config ############################
@@ -462,3 +487,9 @@ augroup alestatus
 augroup end
 " }}}
 
+" go
+" vim-go
+let g:go_list_type = "quickfix"
+let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
+let g:ale_linters['go'] = ['golint', 'govet']       " run golint with Ale

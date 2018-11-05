@@ -100,16 +100,13 @@ export EDITOR=vim
 source $HOME/code/iwork/lucidity/config/alias.zsh
 source $HOME/code/iwork/zsh/alias.zsh
 
-# Load tmux when opening the terminal
-if command -v tmux>/dev/null; then
-  if [[ ! $TERM =~ screen ]] && [ -z $TMUX ]; then
-    tmux attach -t base || tmux new -s base
-  fi
-fi
+# [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+export PATH="$PATH:/usr/local/go/bin"
 export PATH="$HOME/.rbenv/bin:$PATH"
+
 eval "$(rbenv init -)"
