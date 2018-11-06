@@ -59,7 +59,7 @@ hi Identifier   ctermfg=31 guifg=#0086B3
 hi PreProc  ctermfg=247 guifg=#001100 gui=none cterm=none
 hi Comment  ctermfg=246 guifg=#999988
 hi Constant ctermfg=6 guifg=#177F80 gui=none cterm=none
-hi String   ctermfg=161 guifg=#267c15
+hi String   ctermfg=161 guifg=#00163d
 hi Function ctermfg=88 guifg=#990000 gui=none cterm=none
 hi Statement    ctermfg=0 guifg=#001100 gui=none cterm=none
 hi Type     ctermfg=60 guifg=#124282 gui=none   cterm=none
