@@ -26,13 +26,27 @@ Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
-Plug 'Yggdroot/indentLine'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
+
+" https://github.com/Valloric/YouCompleteMe/issues/1751
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --js-completer
+  endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
 call plug#end()
 
 filetype plugin indent on
+
+" YCM
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_filetype_specific_completion_to_disable = {
+\ 'ruby': 1
+\}
 
 " vim-polyglot {{{
 let g:polyglot_disabled = ['ruby']
@@ -238,18 +252,11 @@ augroup vimrc-remember-cursor-position
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
+" autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
 " }}}
 
 "" ############################## Plugin Config ###############################
-
-" IndentLine
-let g:indentLine_enabled = 1
-let g:indentLine_concealcursor = 0
-let g:indentLine_char = '┆'
-let g:indentLine_color_gui = '#3A4045'
-let g:indentLine_faster = 1
 
 " vim-session {{{
 let g:session_directory = "~/.config/nvim/session"
@@ -264,17 +271,7 @@ nnoremap <leader>sc :CloseSession<CR>
 " }}}
 
 " NERDTree {{{
-" Toggle NERDTree
-function! ToggleNerdTree()
-  if @% != "" && (!exists("g:NERDTree") || (g:NERDTree.ExistsForTab() && !g:NERDTree.IsOpen()))
-    :NERDTreeFind
-  else
-    :NERDTreeToggle
-  endif
-endfunction
-" toggle nerd tree
-nmap <silent> <leader>k :call ToggleNerdTree()<cr>
-" find the current file in nerdtree without needing to reload the drawer
+nmap <silent> <leader>k :NERDTreeToggle<cr>
 nmap <silent> <leader>y :NERDTreeFind<cr>
 
 let NERDTreeShowHidden=1
