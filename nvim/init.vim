@@ -30,6 +30,7 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
 " https://github.com/Valloric/YouCompleteMe/issues/1751
+" install cmake first
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
     !./install.py --js-completer
@@ -41,16 +42,6 @@ call plug#end()
 
 filetype plugin indent on
 
-" YCM
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_filetype_specific_completion_to_disable = {
-\ 'ruby': 1
-\}
-
-" vim-polyglot {{{
-let g:polyglot_disabled = ['ruby']
-" }}}
 
 " General {{{
 "" Encoding
@@ -439,3 +430,14 @@ augroup end
 """ Go {{{
 nmap <silent> <leader>ip :GoImports<cr>
 """ }}}
+
+" YCM
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_filetype_specific_completion_to_disable = {
+\ 'ruby': 1
+\}
+
+" vim-polyglot {{{
+let g:polyglot_disabled = ['ruby']
+" }}}
