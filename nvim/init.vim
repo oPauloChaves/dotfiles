@@ -10,8 +10,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
-Plug 'w0rp/ale' " Asynchonous linting engine
-Plug 'tpope/vim-endwise', { 'for': [ 'ruby', 'bash', 'zsh', 'sh' ]}
+Plug 'w0rp/ale'
+Plug 'tpope/vim-endwise'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx', 'eruby' ]}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -221,14 +221,8 @@ set wildmenu
 " Complete files like a shell
 set wildmode=list:longest,list:full
 
-" Show invisibles (tabs, line endings etc.)
-set list
-
-" Choose symbols to show invisibles
-" set listchars=tab:▸\ ,eol:¬,trail:·,nbsp:.,extends:❯,precedes:❮
-
 " Don’t syntax highlight lines longer than 800 characters
-set synmaxcol=800
+set synmaxcol=400
 
 " Visuall select of just pasted stuff
 nnoremap gp `[v`]
@@ -251,9 +245,6 @@ augroup vimrc-remember-cursor-position
   autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
-
-" autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType css,scss set omnifunc=csscomplete#CompleteCSS
 " }}}
 
 "" ############################## Plugin Config ###############################
@@ -278,7 +269,7 @@ let NERDTreeShowHidden=1
 " }}}
 
 " vim-fugitive {{{
-nmap <silent> <leader>gs :Gstatus<cr>
+nmap <silent><leader>gs :Gstatus<cr>
 nmap <silent><leader>gb :Gblame<cr>
 " }}}
 
@@ -444,3 +435,7 @@ augroup alestatus
   autocmd User ALELint call lightline#update()
 augroup end
 " }}}
+
+""" Go {{{
+nmap <silent> <leader>ip :GoImports<cr>
+""" }}}
