@@ -46,6 +46,12 @@ $ mkdir -p ~/.zsh/completion
 $ curl -L https://raw.githubusercontent.com/docker/compose/1.20.1/contrib/completion/zsh/_docker-compose > ~/.zsh/completion/_docker-compose
 ```
 
+### zsh autosuggestions
+
+```sh
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+
 Using a [plugin](https://github.com/robbyrussell/oh-my-zsh#using-oh-my-zsh) within oh-my-zsh
 
 ### Sublime Text
