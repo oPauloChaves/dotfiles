@@ -324,19 +324,8 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 
-if &term =~ '256color'
-  " disable Background Color Erase (BCE) so that color schemes
-  " render properly when inside 256-color tmux and GNU screen.
-  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
-  set t_ut=
-endif
-
 " Syntax highlighting
 syntax on
-
-if (has("termguicolors"))
-  set termguicolors
-endif
 
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
