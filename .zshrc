@@ -101,14 +101,26 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 export EDITOR=vim
 
-source $HOME/code/iwork/lucidity/config/alias.zsh
-source $HOME/code/iwork/zsh/alias.zsh
+if [ -d "$HOME/code/iwork" ]; then
+  source $HOME/code/iwork/lucidity/config/alias.zsh
+  source $HOME/code/iwork/zsh/alias.zsh
+fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 
-export PATH="$PATH:/usr/local/go/bin:/home/paulo/go/bin"
-export PATH="$HOME/.rbenv/bin:$PATH"
+if [ -d "/usr/local/go" ]; then
+  export PATH="$PATH:/usr/local/go/bin:/home/paulo/go/bin"
+fi
 
-eval "$(rbenv init -)"
+if [ -d "$HOME/.rbenv" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
+if [ -d "$HOME/bin" ]; then
+  export PATH="$HOME/bin:$PATH"
+fi
