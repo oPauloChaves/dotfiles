@@ -30,8 +30,16 @@ else
   [[ -s "$HOME/.config/nvim/init.vim" ]] && mv "$HOME/.config/nvim/init.vim" "$HOME/.config/nvim/old-init.vim"
 fi
 
-ln -s "$HOME/code/dotfiles/.bashrc" "$HOME/.bashrc"
+if [ ! -d "$HOME/.zsh.d" ]; then
+  mkdir "$HOME/.zsh.d"
+fi
+
+for file in zsh/*; do
+  ln -s "$(pwd)/$file" "$HOME/.zsh.d/$(basename $file)"
+done
+
 ln -s "$HOME/code/dotfiles/.zshrc" "$HOME/.zshrc"
+ln -s "$HOME/code/dotfiles/.bashrc" "$HOME/.bashrc"
 # ln -s "$HOME/dotfiles/.profile" "$HOME/.profile"
 ln -s "$HOME/code/dotfiles/.inputrc" "$HOME/.inputrc"
 ln -s "$HOME/code/dotfiles/.tern-config" "$HOME/.tern-config"
