@@ -32,11 +32,11 @@ setopt auto_menu
 # move cursor to end if word had one match
 setopt always_to_end
 # select completions with arrow keys
-zstyle ':completion:*' menu select
+zstyle ":completion:*" menu select
 # group results by category
-zstyle ':completion:*' group-name ''
+zstyle ":completion:*" group-name ""
 # enable approximate matches for completion
-zstyle ':completion:::::' completer _expand _complete _ignored _approximate
+zstyle ":completion:::::" completer _expand _complete _ignored _approximate
 
 # Load antibody plugin manager
 source <(antibody init)
@@ -46,13 +46,15 @@ antibody bundle zdharma/fast-syntax-highlighting
 antibody bundle zsh-users/zsh-autosuggestions
 antibody bundle zsh-users/zsh-history-substring-search
 antibody bundle zsh-users/zsh-completions
-antibody bundle marzocchi/zsh-notify
 
 # Keybindings
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey '^[[3~' delete-char
-bindkey '^[3;5~' delete-char
+bindkey "^P" history-substring-search-up # Ctrl + p
+bindkey "^N" history-substring-search-down # Ctrl + n
+
+bindkey "^[[3~" delete-char
+bindkey "^[3;5~" delete-char
+
+bindkey "^ " autosuggest-accept # Ctrl + space
 
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section
@@ -72,15 +74,17 @@ antibody bundle denysdovhan/spaceship-prompt
 
 # --------------------------
 
-# Open new tabs in same directory
-if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
-  function chpwd {
-    printf '\e]7;%s\a' "file://$HOSTNAME${PWD// /%20}"
-  }
-  chpwd
-fi
+# Run `nvm` init script on demand to avoid constant slow downs
+function nvm {
+  if [ -z ${NVM_DIR+x} ]; then
+    export NVM_DIR="$HOME/.nvm"
 
-# --------------------------
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+    nvm "$@"
+  fi
+}
 
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
@@ -90,12 +94,6 @@ export EDITOR=vim
 if [ -d "$HOME/code/iwork" ]; then
   source $HOME/code/iwork/lucidity/config/alias.zsh
   source $HOME/code/iwork/zsh/alias.zsh
-fi
-
-if [ -d "$HOME/.nvm" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
 if [ -d "/usr/local/go" ]; then
@@ -112,6 +110,7 @@ if [ -d "$HOME/bin" ]; then
   export PATH="$HOME/bin:$PATH"
 fi
 
+source ~/.zsh.d/alias.zsh
 source ~/.zsh.d/alias-git.zsh
 
 source ~/.zsh.d/fzf.zsh

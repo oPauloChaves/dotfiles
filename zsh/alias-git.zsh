@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+
 alias g='git'
 
 alias ga='git add'
@@ -17,3 +19,4 @@ alias gst='git status'
 alias gsta='git stash save'
 alias gstaa='git stash apply'
 alias gstc='git stash clear'
+
