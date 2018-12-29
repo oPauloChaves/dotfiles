@@ -10,6 +10,10 @@
 
 [ -d ~/.zsh.d ] || mkdir ~/.zsh.d
 
+for file in lib/*.zsh; do
+  [ -L ~/.zsh.d/$(basename $file) ] || ln -s "$(pwd)/$file" ~/.zsh.d/$(basename $file)
+done
+
 for file in zsh/*; do
   [ -L ~/.zsh.d/$(basename $file) ] || ln -s "$(pwd)/$file" ~/.zsh.d/$(basename $file)
 done

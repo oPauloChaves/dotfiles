@@ -21,10 +21,6 @@ setopt inc_append_history
 setopt share_history
 # cd by typing directory name if it's not a command
 setopt auto_cd
-# autocorrect commands
-setopt correct_all
-# autocorrect commands
-setopt correct_all
 # automatically list choices on ambiguous completion
 setopt auto_list
 # automatically use menu completion
@@ -109,6 +105,8 @@ fi
 if [ -d "$HOME/bin" ]; then
   export PATH="$HOME/bin:$PATH"
 fi
+
+source ~/.zsh.d/git.zsh
 
 source ~/.zsh.d/alias.zsh
 source ~/.zsh.d/alias-git.zsh
