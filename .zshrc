@@ -115,3 +115,4 @@ source ~/.zsh.d/alias-git.zsh
 
 source ~/.zsh.d/fzf.zsh
 
+[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session; }
