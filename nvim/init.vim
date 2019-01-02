@@ -213,14 +213,11 @@ let g:user_emmet_leader_key='<C-E>'
 let g:fzf_layout = { 'down': '~25%' }
 
 if isdirectory(".git")
-  " if in a git project, use :GFiles
   nmap <silent> <leader>f :GFiles --cached --others --exclude-standard<cr>
 else
-  " otherwise, use :FZF
   nmap <silent> <leader>f :FZF<cr>
 endif
 
-" Display available mappings
 nmap <silent> <leader>b :Buffers<cr>
 
 """ UltiSnips

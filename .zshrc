@@ -106,6 +106,8 @@ if [ -d "$HOME/bin" ]; then
   export PATH="$HOME/bin:$PATH"
 fi
 
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+
 source ~/.zsh.d/git.zsh
 
 source ~/.zsh.d/alias.zsh
@@ -113,4 +115,3 @@ source ~/.zsh.d/alias-git.zsh
 
 source ~/.zsh.d/fzf.zsh
 
-[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session; }

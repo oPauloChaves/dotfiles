@@ -27,3 +27,7 @@ done
 [ ! -L ~/.tmux.conf ] && ln -s "$(pwd)/tmux/tmux.conf" ~/.tmux.conf
 
 echo "Setup done"
+
+# TODO (scripts)
+# - Install ripgrep (used by ferret plugin)
+# - fzf to use ripgrep
