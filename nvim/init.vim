@@ -84,10 +84,19 @@ set hidden                " current buffer can be put into background
 set scrolloff=5           " lines of text around cursor
 set showmatch             " show matching braces
 
-" convert tabs to spaces
-set expandtab
-set softtabstop=4
-set shiftwidth=4
+" Tab control
+set noexpandtab " insert tabs rather than spaces for <Tab>
+set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
+set tabstop=4 " the visible width of tabs
+set softtabstop=4 " edit as if the tabs are 4 characters wide
+set shiftwidth=4 " number of spaces to use for indent and unindent
+set shiftround " round indent to a multiple of 'shiftwidth'
+
+" Folding
+set foldmethod=syntax
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
 
 " Highlight line with cursor
 set cursorline
@@ -183,6 +192,7 @@ nmap <silent><leader>gb :Gblame<cr>
 
 """ ALE
 let g:ale_change_sign_column_color = 0
+let g:ale_sign_column_always = 1
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
 let g:ale_set_highlights = 0
@@ -192,6 +202,9 @@ let g:ale_linters = {
 \ 'ruby': ['rubocop'],
 \ 'html': []
 \}
+
+""" airline
+let g:airline#extensions#ale#enabled = 1
 
 """ Prettier
 let g:prettier#exec_cmd_async = 1

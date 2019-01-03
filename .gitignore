@@ -1,3 +1,4 @@
 *.log
 
 nvim/autoload/plug.vim
+nvim/.netrwhist

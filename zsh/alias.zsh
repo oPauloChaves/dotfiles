@@ -15,3 +15,6 @@ alias q='exit'
 # Disk utility aliases
 alias df='df -h'
 alias du='du -h'
+
+alias doko="cd ~/code/dotfiles/docker && docker-compose up"
+alias dokob="cd ~/code/dotfiles/docker && docker-compose up --build"
