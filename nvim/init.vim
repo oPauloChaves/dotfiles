@@ -24,15 +24,14 @@ Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
 
 " https://github.com/Valloric/YouCompleteMe/issues/1751
 " install cmake first
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
-    !./install.py --js-completer
+    !./install.py --ts-completer
   endif
 endfunction
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
@@ -200,11 +199,10 @@ let g:ale_set_highlights = 0
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
 \ 'ruby': ['rubocop'],
-\ 'html': []
+\ 'html': [],
+\ 'java': []
 \}
 
-""" airline
-let g:airline#extensions#ale#enabled = 1
 
 """ Prettier
 let g:prettier#exec_cmd_async = 1
@@ -248,3 +246,14 @@ let g:ycm_filetype_specific_completion_to_disable = {
 
 """ vim-polyglot
 let g:polyglot_disabled = ['ruby']
+
+""" lightline
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#head'
+  \ },
+  \ }

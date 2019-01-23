@@ -83,10 +83,17 @@ function nvm {
   fi
 }
 
+# system's npm
+# Fix permissions: https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+if [ -f "/usr/bin/npm" ]; then
+  export NPM_CONFIG_PREFIX="~/.npm-global"
+  export PATH=~/.npm-global/bin:$PATH
+fi
+
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-export EDITOR=vim
+export EDITOR=vi
 
 if [ -d "$HOME/code/iwork" ]; then
   source $HOME/code/iwork/lucidity/config/alias.zsh
@@ -96,6 +103,7 @@ fi
 if [ -d "/usr/local/go" ]; then
   export PATH="$PATH:/usr/local/go/bin:/home/paulo/go/bin"
   export GOPATH=$HOME/go
+  export GO111MODULE=on
 fi
 
 if [ -d "$HOME/.rbenv" ]; then
@@ -110,9 +118,7 @@ fi
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 source ~/.zsh.d/git.zsh
-
 source ~/.zsh.d/alias.zsh
 source ~/.zsh.d/alias-git.zsh
-
 source ~/.zsh.d/fzf.zsh
 

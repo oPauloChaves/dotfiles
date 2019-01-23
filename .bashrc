@@ -116,18 +116,40 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export EDITOR=vim
+export EDITOR=vi
 
 source $HOME/code/iwork/lucidity/config/alias.zsh
 source $HOME/code/iwork/zsh/alias.zsh
 
 # [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Run `nvm` init script on demand to avoid constant slow downs
+function nvm {
+  if [ -z ${NVM_DIR+x} ]; then
+    export NVM_DIR="$HOME/.nvm"
 
-export PATH="$PATH:/usr/local/go/bin"
-export PATH="$HOME/.rbenv/bin:$PATH"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-eval "$(rbenv init -)"
+    nvm "$@"
+  fi
+}
+
+if [ -f "/usr/bin/npm" ]; then
+  export NPM_CONFIG_PREFIX="~/.npm-global"
+fi
+
+if [ -d "/usr/local/go" ]; then
+  export PATH="$PATH:/usr/local/go/bin:/home/paulo/go/bin"
+  export GOPATH=$HOME/go
+  export GO111MODULE=on
+fi
+
+if [ -d "$HOME/.rbenv" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
+if [ -d "$HOME/bin" ]; then
+  export PATH="$HOME/bin:$PATH"
+fi

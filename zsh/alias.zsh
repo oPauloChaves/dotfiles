@@ -18,3 +18,5 @@ alias du='du -h'
 
 alias doko="cd ~/code/dotfiles/docker && docker-compose up"
 alias dokob="cd ~/code/dotfiles/docker && docker-compose up --build"
+
+alias go-src="cd ~/go/src/github.com"
