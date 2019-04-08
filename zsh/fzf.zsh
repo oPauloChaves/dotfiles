@@ -1,4 +1,13 @@
-# Shell completion and plugins for vim or neovim are enabled by default on Fedora.
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == */home/paulo/.fzf/bin* ]]; then
+  export PATH="$PATH:/home/paulo/.fzf/bin"
+fi
 
-# Enabling key bindings
-source "/usr/share/fzf/shell/key-bindings.zsh"
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "/home/paulo/.fzf/shell/completion.zsh" 2> /dev/null
+
+# Key bindings
+# ------------
+source "/home/paulo/.fzf/shell/key-bindings.zsh"

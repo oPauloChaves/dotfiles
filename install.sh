@@ -8,13 +8,11 @@ if [ -z "$MY_PATH" ] ; then
 fi
 
 # ZSH
-# sh $MY_PATH/config-zsh.sh
+sh $MY_PATH/config-zsh.sh
 
-# VIM
-# [ -f ~/.vimrc ] && [ ! -f ~/.old-vimrc ] && mv ~/.vimrc ~/.old-vimrc
-# [ -d ~/.vim ] && [ ! -d ~/.old-vim ] && mv ~/.vim ~/.old-nvim
-# [ ! -L ~/.vimrc ] && ln -s "$(pwd)/vimrc" ~/.vimrc
-# [ ! -L ~/.vim ] && ln -s "$MY_PATH/vim" ~/.vim
+# Neovim
+[ -d ~/.config/nvim ] && [ ! -d ~/.config/old-nvim ] && mv ~/.config/nvim ~/.config/old-nvim
+[ ! -L ~/.config/nvim ] && ln -s "$(pwd)/nvim" ~/.config/nvim
 
 # TMUX
 [ -f ~/.tmux.conf ] && [ ! -f ~/.old-tmux.conf ] && mv ~/.tmux.conf ~/.old-tmux.conf
