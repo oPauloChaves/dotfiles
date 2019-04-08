@@ -93,12 +93,7 @@ fi
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-export EDITOR=vi
-
-if [ -d "$HOME/code/iwork" ]; then
-  source $HOME/code/iwork/lucidity/config/alias.zsh
-  source $HOME/code/iwork/zsh/alias.zsh
-fi
+export EDITOR=vim
 
 if [ -d "/usr/local/go" ]; then
   export PATH="$PATH:/usr/local/go/bin:/home/paulo/go/bin"
@@ -117,8 +112,6 @@ fi
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
-source ~/.zsh.d/git.zsh
-source ~/.zsh.d/alias.zsh
-source ~/.zsh.d/alias-git.zsh
-source ~/.zsh.d/fzf.zsh
-
+for file in $HOME/.zsh.d/*.zsh; do
+  source "$file"
+done
