@@ -17,7 +17,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'wincent/ferret'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -31,7 +31,7 @@ Plug 'chriskempson/base16-vim'
 " install cmake first
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
-    !./install.py --ts-completer
+    !./install.py --ts-completer --clangd-completer --clang-completer
   endif
 endfunction
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
@@ -235,7 +235,7 @@ nmap <silent> <leader>b :Buffers<cr>
 let g:UltiSnipsExpandTrigger="<c-j>"
 
 """ Go
-nmap <silent> <leader>ip :GoImports<cr>
+" nmap <silent> <leader>ip :GoImports<cr>
 
 """ YCM
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -243,6 +243,8 @@ let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_filetype_specific_completion_to_disable = {
 \ 'ruby': 1
 \}
+let g:ycm_use_clangd = 0
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/ycm_extra_conf.py'
 
 """ vim-polyglot
 let g:polyglot_disabled = ['ruby']
