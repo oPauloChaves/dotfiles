@@ -76,6 +76,10 @@ function nvm {
   if [ -z ${NVM_DIR+x} ]; then
     export NVM_DIR="$HOME/.nvm"
 
+	if [[ -v NPM_CONFIG_PREFIX ]]; then
+		unset NPM_CONFIG_PREFIX
+	fi
+
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 

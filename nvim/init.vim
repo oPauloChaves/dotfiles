@@ -12,12 +12,11 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
 Plug 'w0rp/ale'
 Plug 'tpope/vim-endwise'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx', 'eruby' ]}
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'css' ]}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'wincent/ferret'
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -25,6 +24,8 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
 Plug 'itchyny/lightline.vim'
+
+" https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/
 Plug 'chriskempson/base16-vim'
 
 " https://github.com/Valloric/YouCompleteMe/issues/1751
@@ -104,7 +105,7 @@ set cursorline
 " partially lifted from http://stackoverflow.com/a/15583861/4921402
 set wildmenu
 set wildmode=list:longest,list:full
-set wildignore+=*/.hg/*,*/.git/*.,*/.DS_Store,*/.idea/*,*/.tmp/*,*/target/*
+set wildignore+=*/.hg/*,*/.git/*.,*/.DS_Store,*/.idea/*,*/.tmp/*,*/target/*,*/node_modules/*
 
 " Don’t syntax highlight lines longer than 800 characters
 set synmaxcol=400
@@ -198,9 +199,7 @@ let g:ale_set_highlights = 0
 
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
-\ 'ruby': ['rubocop'],
 \ 'html': [],
-\ 'java': []
 \}
 
 
@@ -218,7 +217,6 @@ let g:user_emmet_settings = {
 \    'extends': 'jsx',
 \  },
 \}
-let g:user_emmet_leader_key='<C-E>'
 
 """ FZF
 let g:fzf_layout = { 'down': '~25%' }
@@ -234,21 +232,6 @@ nmap <silent> <leader>b :Buffers<cr>
 """ UltiSnips
 let g:UltiSnipsExpandTrigger="<c-j>"
 
-""" Go
-" nmap <silent> <leader>ip :GoImports<cr>
-
-""" YCM
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_filetype_specific_completion_to_disable = {
-\ 'ruby': 1
-\}
-let g:ycm_use_clangd = 0
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/ycm_extra_conf.py'
-
-""" vim-polyglot
-let g:polyglot_disabled = ['ruby']
-
 """ lightline
 let g:lightline = {
   \ 'active': {
@@ -259,3 +242,9 @@ let g:lightline = {
   \   'gitbranch': 'fugitive#head'
   \ },
   \ }
+
+""" YCM
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_use_clangd = 0
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/ycm_extra_conf.py'
