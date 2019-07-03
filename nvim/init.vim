@@ -12,7 +12,7 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
 Plug 'w0rp/ale'
 Plug 'tpope/vim-endwise'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'css' ]}
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'css', 'typescript', 'typescript.tsx' ]}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
@@ -215,6 +215,9 @@ let g:vim_json_syntax_conceal = 0
 let g:user_emmet_settings = {
 \  'javascript.jsx': {
 \    'extends': 'jsx',
+\  },
+\  'typescript.tsx' : {
+\    'extends' : 'jsx',
 \  },
 \}
 
