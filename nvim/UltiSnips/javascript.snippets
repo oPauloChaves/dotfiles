@@ -7,3 +7,37 @@ endsnippet
 snippet esl "eslint disable line"
 // eslint-disable-line $1
 endsnippet
+
+snippet imr "import React"
+import React from "react";
+endsnippet
+
+snippet rfe "React Functional Component" b
+import React from 'react';
+
+const ${1:`!v expand('%:t:r')`} = () => {
+	return (
+		<${3:div} className="$4">
+			$0
+		</$3>
+	);
+}
+
+export default $1;
+endsnippet
+
+snippet rce "React Class Component" b
+import React, { Component } from 'react';
+
+export class ${1:`!v expand('%:t:r')`} extends Component {
+  render() {
+    return (
+      <${3:div} className="$4">
+        $0
+      </$3>
+    );
+  }
+}
+
+export default $1;
+endsnippet

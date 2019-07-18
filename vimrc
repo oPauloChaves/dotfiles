@@ -1,8 +1,19 @@
-set nocompatible " disable vi compatibility
+" Default shell
+set shell=/bin/zsh
+scriptencoding utf-8
+
+" #######
+" Bundles
+" #######
+if &compatible
+  set nocompatible
+endif
+
+filetype off
 
 " ensure vim-plug is installed and then load it
 call functions#PlugLoad()
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
@@ -12,27 +23,26 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
 Plug 'w0rp/ale'
 Plug 'tpope/vim-endwise'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'css', 'typescript', 'typescript.tsx' ]}
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx', 'eruby' ]}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'wincent/ferret'
 Plug 'sheerun/vim-polyglot'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug '/usb/bin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
 Plug 'itchyny/lightline.vim'
 
-" https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/
-Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim', {'do': 'git checkout dict_fix'}
 
 " https://github.com/Valloric/YouCompleteMe/issues/1751
 " install cmake first
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
-    !./install.py --ts-completer --clangd-completer --clang-completer
+    !./install.py --ts-completer
   endif
 endfunction
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
@@ -47,10 +57,10 @@ set history=1000 " change history to 1000
 set nobackup
 set noswapfile
 
-if (has('nvim'))
+if exists('&inccommand')
   " show results of substition as they're happening
   " but don't open a split
-  set inccommand=nosplit
+  set inccommand=split
 endif
 
 " Allow backspace to work on all characters (not just insert mode)
@@ -100,12 +110,13 @@ set foldlevel=2
 
 " Highlight line with cursor
 set cursorline
+:hi CursorLine   cterm=NONE ctermbg=236 ctermfg=none
 
 " Visual autocomplete for command menu (e.g. :e ~/path/to/file)
 " partially lifted from http://stackoverflow.com/a/15583861/4921402
 set wildmenu
 set wildmode=list:longest,list:full
-set wildignore+=*/.hg/*,*/.git/*.,*/.DS_Store,*/.idea/*,*/.tmp/*,*/target/*,*/node_modules/*
+set wildignore+=*/.hg/*,*/.git/*.,*/.DS_Store,*/.idea/*,*/.tmp/*,*/target/*
 
 " Don’t syntax highlight lines longer than 800 characters
 set synmaxcol=400
@@ -153,8 +164,8 @@ noremap <Leader>h :split<CR>
 noremap <Leader>v :vsplit<CR>
 
 " Quickly open/reload vim
-nnoremap <leader>ev :e! ~/.config/nvim/init.vim<CR>
-nnoremap <leader>er :source ~/.config/nvim/init.vim<CR>
+nnoremap <leader>ev :e! ~/.vimrc<CR>
+nnoremap <leader>er :source ~/.vimrc<CR>
 
 """ Keep the window centered
 noremap G Gzzzv
@@ -162,6 +173,8 @@ noremap n nzzzv
 noremap N Nzzzv
 noremap } }zzzv
 noremap { {zzzv
+
+" }}} General Mappings
 
 """ Colors
 syntax on
@@ -199,7 +212,9 @@ let g:ale_set_highlights = 0
 
 let g:ale_linters = {
 \ 'javascript': ['eslint'],
+\ 'ruby': ['rubocop'],
 \ 'html': [],
+\ 'java': []
 \}
 
 
@@ -216,10 +231,8 @@ let g:user_emmet_settings = {
 \  'javascript.jsx': {
 \    'extends': 'jsx',
 \  },
-\  'typescript.tsx' : {
-\    'extends' : 'jsx',
-\  },
 \}
+let g:user_emmet_leader_key='<C-E>'
 
 """ FZF
 let g:fzf_layout = { 'down': '~25%' }
@@ -235,6 +248,19 @@ nmap <silent> <leader>b :Buffers<cr>
 """ UltiSnips
 let g:UltiSnipsExpandTrigger="<c-j>"
 
+""" Go
+" nmap <silent> <leader>ip :GoImports<cr>
+
+""" YCM
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_filetype_specific_completion_to_disable = {
+\ 'ruby': 1
+\}
+
+""" vim-polyglot
+let g:polyglot_disabled = ['ruby']
+
 """ lightline
 let g:lightline = {
   \ 'active': {
@@ -245,9 +271,3 @@ let g:lightline = {
   \   'gitbranch': 'fugitive#head'
   \ },
   \ }
-
-""" YCM
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_use_clangd = 0
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/ycm_extra_conf.py'
