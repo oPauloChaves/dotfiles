@@ -160,3 +160,7 @@ bindkey '^X' autosuggest-execute
 
 bindkey "^P" history-substring-search-up # Ctrl + p
 bindkey "^N" history-substring-search-down # Ctrl + n
+
+if [ -d "$HOME/tools" ]; then
+  source $HOME/tools/alias.zsh
+fi

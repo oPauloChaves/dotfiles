@@ -85,12 +85,14 @@ set scrolloff=5           " lines of text around cursor
 set showmatch             " show matching braces
 
 " Tab control
-set noexpandtab " insert tabs rather than spaces for <Tab>
+set expandtab " convert tabs to spaces
 set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 set tabstop=4 " the visible width of tabs
 set softtabstop=4 " edit as if the tabs are 4 characters wide
 set shiftwidth=4 " number of spaces to use for indent and unindent
 set shiftround " round indent to a multiple of 'shiftwidth'
+
+autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
 
 " Folding
 set foldmethod=syntax
@@ -173,7 +175,7 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 
 """ Remove unwanted whitespace when saving
-autocmd BufWritePre * silent! %s/\s\+$//e
+" autocmd BufWritePre * silent! %s/\s\+$//e
 
 """ Remember cursor position
 augroup vimrc-remember-cursor-position
