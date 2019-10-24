@@ -7,20 +7,14 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-fugitive'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'npm install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
-Plug 'w0rp/ale'
 Plug 'tpope/vim-endwise'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'css', 'typescript', 'typescript.tsx' ]}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'jiangmiao/auto-pairs'
 Plug 'wincent/ferret'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
 Plug 'itchyny/lightline.vim'
@@ -28,14 +22,16 @@ Plug 'itchyny/lightline.vim'
 " https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/
 Plug 'chriskempson/base16-vim'
 
-" https://github.com/Valloric/YouCompleteMe/issues/1751
-" install cmake first
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --ts-completer --clangd-completer --clang-completer
-  endif
-endfunction
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'} " mru and stuff
+Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
 
 call plug#end()
 
@@ -192,24 +188,6 @@ let NERDTreeShowHidden=1
 nmap <silent><leader>gs :Gstatus<cr>
 nmap <silent><leader>gb :Gblame<cr>
 
-""" ALE
-let g:ale_change_sign_column_color = 0
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
-let g:ale_set_highlights = 0
-
-let g:ale_linters = {
-\ 'javascript': ['eslint'],
-\ 'html': [],
-\}
-
-
-""" Prettier
-let g:prettier#exec_cmd_async = 1
-let g:prettier#autoformat = 0
-nnoremap <Leader>p :Prettier<CR>
-
 """ JSON
 let g:vim_json_syntax_conceal = 0
 
@@ -234,22 +212,16 @@ endif
 
 nmap <silent> <leader>b :Buffers<cr>
 
-""" UltiSnips
-let g:UltiSnipsExpandTrigger="<c-j>"
-
-""" lightline
+" Add diagnostic info for https://github.com/itchyny/lightline.vim
 let g:lightline = {
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-  \ },
-  \ 'component_function': {
-  \   'gitbranch': 'fugitive#head'
-  \ },
-  \ }
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             ['gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
 
-""" YCM
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_use_clangd = 0
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/ycm_extra_conf.py'
