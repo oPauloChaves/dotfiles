@@ -105,8 +105,8 @@ set wildmenu
 set wildmode=list:longest,list:full
 set wildignore+=*/.hg/*,*/.git/*.,*/.DS_Store,*/.idea/*,*/.tmp/*,*/target/*,*/node_modules/*
 
-" Don’t syntax highlight lines longer than 800 characters
-set synmaxcol=400
+" Don’t syntax highlight lines longer than 300 characters
+set synmaxcol=300
 
 " General Mappings {{{
 " set a map leader for more key combos
@@ -123,7 +123,7 @@ nmap <leader>w :w<cr>
 "" Buffer navigation
 noremap <leader>z :bp<CR>
 noremap <leader>x :bn<CR>
-noremap <leader>c :bd<CR>
+noremap <leader>d :bd<CR>
 " Quick toggle between buffers
 noremap <leader>j :b#<CR>
 
@@ -217,10 +217,9 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             ['gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \             ['gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'cocstatus': 'coc#status',
       \   'gitbranch': 'fugitive#head'
       \ },
       \ }
