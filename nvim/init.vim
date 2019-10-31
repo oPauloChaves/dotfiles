@@ -11,6 +11,7 @@ Plug 'tpope/vim-endwise'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'css', 'typescript', 'typescript.tsx' ]}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-rails'
 Plug 'wincent/ferret'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -163,7 +164,6 @@ noremap { {zzzv
 
 """ Colors
 syntax on
-set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
@@ -223,4 +223,3 @@ let g:lightline = {
       \   'gitbranch': 'fugitive#head'
       \ },
       \ }
-
