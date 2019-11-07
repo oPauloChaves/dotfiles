@@ -6,6 +6,7 @@
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
+  "javascript.suggestionActions.enabled": false,
   "snippets.extends": {
     "cpp": ["c"],
     "javascriptreact": ["javascript"],
