@@ -1,7 +1,7 @@
 {
   "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "Markdown", "javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
@@ -11,5 +11,14 @@
     "cpp": ["c"],
     "javascriptreact": ["javascript"],
     "typescript": ["javascript"]
-  }
+  },
+  "editor.snippetSuggestions": "top",
+  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.includeLanguages": {
+    "eruby": "html",
+    "javascript": "javascriptreact",
+    "scss": "css",
+    "sass": "css"
+  },
+  "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly"
 }
