@@ -20,6 +20,7 @@ Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'airblade/vim-gitgutter'
 
 " https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/
 Plug 'chriskempson/base16-vim'
