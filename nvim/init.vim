@@ -15,8 +15,6 @@ Plug 'wincent/ferret'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'honza/vim-snippets'
-Plug 'epilande/vim-react-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'airblade/vim-gitgutter'
@@ -27,9 +25,14 @@ Plug 'chriskempson/base16-vim'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
 Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
+
+Plug 'honza/vim-snippets'
+Plug 'epilande/vim-react-snippets'
 
 call plug#end()
 
@@ -65,28 +68,26 @@ set mouse=a
 " Searching
 set ignorecase
 set smartcase
-set magic                            " Set magic on, for regex
-set hlsearch                         " highlight search results
-set incsearch                        " set incremental search, like modern browsers
+set magic             " Set magic on, for regex
+set hlsearch          " highlight search results
+set incsearch         " set incremental search, like modern browsers
 
 " Don’t break lines
 set textwidth=0
 set nowrap
-set number                " show line numbers
-set autoindent            " automatically set indent of new line
-set hidden                " current buffer can be put into background
-set scrolloff=5           " lines of text around cursor
-set showmatch             " show matching braces
+set number            " show line numbers
+set autoindent        " automatically set indent of new line
+set hidden            " current buffer can be put into background
+set scrolloff=5       " lines of text around cursor
+set showmatch         " show matching braces
 
 " Tab control
-set expandtab " convert tabs to spaces
-set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
-set tabstop=4 " the visible width of tabs
-set softtabstop=4 " edit as if the tabs are 4 characters wide
-set shiftwidth=4 " number of spaces to use for indent and unindent
-set shiftround " round indent to a multiple of 'shiftwidth'
-
-autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
+set expandtab         " convert tabs to spaces
+set smarttab          " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
+set tabstop=4         " the visible width of tabs
+set softtabstop=4     " edit as if the tabs are 4 characters wide
+set shiftwidth=4      " number of spaces to use for indent and unindent
+set shiftround        " round indent to a multiple of 'shiftwidth'
 
 " Folding
 set foldmethod=syntax
@@ -106,11 +107,11 @@ set wildignore+=*/.hg/*,*/.git/*.,*/.DS_Store,*/.idea/*,*/.tmp/*,*/target/*,*/no
 " Don’t syntax highlight lines longer than 300 characters
 set synmaxcol=300
 
+let g:netrw_banner = 0
+
 " General Mappings {{{
 " set a map leader for more key combos
 let mapleader = ','
-
-let g:netrw_banner = 0
 
 " Map : to ; (to avoid using SHIFT)
 nnoremap ; :
@@ -184,9 +185,6 @@ let NERDTreeShowHidden=1
 """ vim-fugitive
 nmap <silent><leader>gs :Gstatus<cr>
 nmap <silent><leader>gb :Gblame<cr>
-
-""" JSON
-let g:vim_json_syntax_conceal = 0
 
 """ FZF
 let g:fzf_layout = { 'down': '~25%' }
