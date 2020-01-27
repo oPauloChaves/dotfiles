@@ -8,7 +8,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-endwise'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'css', 'typescript', 'typescript.tsx' ]}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-rails'
@@ -26,12 +25,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'chriskempson/base16-vim'
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'} " mru and stuff
 Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
 Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
 
@@ -191,16 +187,6 @@ nmap <silent><leader>gb :Gblame<cr>
 
 """ JSON
 let g:vim_json_syntax_conceal = 0
-
-""" emmet
-let g:user_emmet_settings = {
-\  'javascript.jsx': {
-\    'extends': 'jsx',
-\  },
-\  'typescript.tsx' : {
-\    'extends' : 'jsx',
-\  },
-\}
 
 """ FZF
 let g:fzf_layout = { 'down': '~25%' }

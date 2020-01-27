@@ -27,13 +27,10 @@ sudo apt-get install p7zip-full p7zip-rar
 ### Neovim
 
 ```sh
-sudo apt-get install software-properties-common
-
-sudo add-apt-repository ppa:neovim-ppa/stable
-sudo apt-get update
-sudo apt-get install neovim
-
-sudo apt-get install python-dev python-pip python3-dev python3-pip
+curl -l https://github.com/neovim/neovim/releases/download/v0.4.3/nvim.appimage > ~/nvim.appimage
+chmod +x nvim.appimage
+mv nvim.appimage nvim
+sudo mv nvim /usr/local/bin/
 
 sudo update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
 sudo update-alternatives --config vi
@@ -41,6 +38,10 @@ sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
 sudo update-alternatives --config vim
 sudo update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
 sudo update-alternatives --config editor
+
+sudo apt-get install software-properties-common
+
+sudo apt-get install python-dev python-pip python3-dev python3-pip
 
 # YCM dependencies
 sudo apt install build-essential cmake python3-dev
