@@ -216,3 +216,31 @@ X-GNOME-UsesNotifications=true
 cd ~/.local/share/applications
 chmod +x postman.desktop
 ```
+
+### Gnome Tweak Tool
+
+```sh
+# https://linuxhint.com/install-vimix-theme-linux/
+# Allow changing themes
+
+sudo apt-get install gnome-tweak-tool
+```
+
+### Papirus Icon Theme
+
+```sh
+sudo add-apt-repository ppa:papirus/papirus
+sudo apt-get update
+sudo apt-get install papirus-icon-theme
+```
+
+### Install Vimix Theme
+
+```sh
+# requirement
+sudo apt-get install gtk2-engines-murrine gtk2-engines-pixbuf
+cd ~/some-folder
+git clone git@github.com:vinceliuice/vimix-gtk-themes.git
+cd vimix-gtk-themes
+./Install
+```
