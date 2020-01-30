@@ -29,7 +29,6 @@ Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
-Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
 
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
@@ -125,6 +124,11 @@ noremap <leader>x :bn<CR>
 noremap <leader>d :bd<CR>
 " Quick toggle between buffers
 noremap <leader>j :b#<CR>
+
+"" Tab navigation
+" Tab navigation like Firefox: only 'open new tab' works in terminal
+nnoremap <C-t>     :tabnew<CR>
+inoremap <C-t>     <Esc>:tabnew<CR>
 
 "" Switching windows
 noremap <C-j> <C-w>j
