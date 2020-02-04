@@ -239,3 +239,7 @@ function! LightlineFilename()
   endif
   return expand('%')
 endfunction
+
+" Setup `Prettier` command
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+nmap <silent> <leader>p :Prettier<cr>

@@ -1,7 +1,6 @@
 {
   "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
-  "coc.preferences.formatOnSaveFiletypes": ["css", "javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
@@ -12,7 +11,6 @@
     "javascriptreact": ["javascript"],
     "typescript": ["javascript"]
   },
-  "editor.snippetSuggestions": "top",
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.includeLanguages": {
     "eruby": "html",
