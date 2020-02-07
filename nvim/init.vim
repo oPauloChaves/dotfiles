@@ -7,31 +7,17 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-rails'
-Plug 'wincent/ferret'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'airblade/vim-gitgutter'
-
-" https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/
-Plug 'chriskempson/base16-vim'
-
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
-
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
+" https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -172,23 +158,27 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
-""" Remove unwanted whitespace when saving
-" autocmd BufWritePre * silent! %s/\s\+$//e
-
 """ Remember cursor position
 augroup vimrc-remember-cursor-position
   autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
+""" Coc config
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ 'coc-emmet',
+  \ ]
+
 """ NERDTree
 nmap <silent> <leader>k :NERDTreeToggle<cr>
 nmap <silent> <leader>y :NERDTreeFind<cr>
 let NERDTreeShowHidden=1
-
-""" vim-fugitive
-nmap <silent><leader>gs :Gstatus<cr>
-nmap <silent><leader>gb :Gblame<cr>
 
 """ FZF
 let g:fzf_layout = { 'down': '~25%' }
@@ -213,6 +203,9 @@ if isdirectory(".git")
 else
   nmap <silent> <leader>f :FZF<cr>
 endif
+
+" Rg current word
+nnoremap <silent> <Leader>rr :Rg <C-R><C-W><CR>
 
 nmap <silent> <leader>b :Buffers<cr>
 
