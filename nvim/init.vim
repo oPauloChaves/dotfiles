@@ -16,7 +16,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
-" https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/
 Plug 'chriskempson/base16-vim'
 
 call plug#end()

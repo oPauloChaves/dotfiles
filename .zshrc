@@ -128,6 +128,8 @@ if [ -f "/usr/bin/npm" ]; then
   export PATH=~/.npm-global/bin:$PATH
 fi
 
+
+# https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
