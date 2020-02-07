@@ -74,20 +74,8 @@ set softtabstop=4     " edit as if the tabs are 4 characters wide
 set shiftwidth=4      " number of spaces to use for indent and unindent
 set shiftround        " round indent to a multiple of 'shiftwidth'
 
-" Folding
-set foldmethod=syntax
-set foldnestmax=10
-set nofoldenable
-set foldlevel=2
-
 " Highlight line with cursor
 set cursorline
-
-" Visual autocomplete for command menu (e.g. :e ~/path/to/file)
-" partially lifted from http://stackoverflow.com/a/15583861/4921402
-set wildmenu
-set wildmode=list:longest,list:full
-set wildignore+=*/.hg/*,*/.git/*.,*/.DS_Store,*/.idea/*,*/.tmp/*,*/target/*,*/node_modules/*
 
 " Don’t syntax highlight lines longer than 300 characters
 set synmaxcol=300
@@ -102,7 +90,7 @@ let mapleader = ','
 nnoremap ; :
 
 " shortcut to save
-nmap <leader>w :w<cr>
+noremap <leader>w :w<CR>
 
 "" Buffer navigation
 noremap <leader>z :bp<CR>
@@ -110,11 +98,6 @@ noremap <leader>x :bn<CR>
 noremap <leader>d :bd<CR>
 " Quick toggle between buffers
 noremap <leader>j :b#<CR>
-
-"" Tab navigation
-" Tab navigation like Firefox: only 'open new tab' works in terminal
-nnoremap <C-t>     :tabnew<CR>
-inoremap <C-t>     <Esc>:tabnew<CR>
 
 "" Switching windows
 noremap <C-j> <C-w>j
@@ -175,6 +158,10 @@ let g:coc_global_extensions = [
   \ 'coc-emmet',
   \ ]
 
+" Setup `Prettier` command
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+nmap <silent> <leader>p :Prettier<cr>
+
 """ NERDTree
 nmap <silent> <leader>k :NERDTreeToggle<cr>
 nmap <silent> <leader>y :NERDTreeFind<cr>
@@ -182,21 +169,6 @@ let NERDTreeShowHidden=1
 
 """ FZF
 let g:fzf_layout = { 'down': '~25%' }
-" Customize fzf colors to match your color scheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
 
 if isdirectory(".git")
   nmap <silent> <leader>f :GFiles --cached --others --exclude-standard<cr>
@@ -233,6 +205,3 @@ function! LightlineFilename()
   return expand('%')
 endfunction
 
-" Setup `Prettier` command
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-nmap <silent> <leader>p :Prettier<cr>
