@@ -1,25 +1,5 @@
 set nocompatible " disable vi compatibility
 
-" ensure vim-plug is installed and then load it
-call functions#PlugLoad()
-call plug#begin('~/.config/nvim/plugged')
-
-Plug 'editorconfig/editorconfig-vim'
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'sheerun/vim-polyglot'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'honza/vim-snippets'
-Plug 'epilande/vim-react-snippets'
-Plug 'chriskempson/base16-vim'
-
-call plug#end()
-
 filetype plugin indent on
 
 set history=1000 " change history to 1000
@@ -113,10 +93,6 @@ vnoremap < <gv
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
-"" Move visual block
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
 "" Split open buffer
 noremap <Leader>h :split<CR>
 noremap <Leader>v :vsplit<CR>
@@ -134,74 +110,3 @@ noremap { {zzzv
 
 """ Colors
 syntax on
-
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
-
-""" Remember cursor position
-augroup vimrc-remember-cursor-position
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-augroup END
-
-""" Coc config
-let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint',
-  \ 'coc-prettier',
-  \ 'coc-json',
-  \ 'coc-emmet',
-  \ 'coc-java',
-  \ ]
-
-" Setup `Prettier` command
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-nmap <silent> <leader>p :Prettier<cr>
-
-""" NERDTree
-nmap <silent> <leader>k :NERDTreeToggle<cr>
-nmap <silent> <leader>y :NERDTreeFind<cr>
-let NERDTreeShowHidden=1
-
-""" FZF
-let g:fzf_layout = { 'down': '~25%' }
-
-if isdirectory(".git")
-  nmap <silent> <leader>f :GFiles --cached --others --exclude-standard<cr>
-else
-  nmap <silent> <leader>f :FZF<cr>
-endif
-
-" Rg current word
-nnoremap <silent> <Leader>rr :Rg <C-R><C-W><CR>
-
-nmap <silent> <leader>b :Buffers<cr>
-
-" Add diagnostic info for https://github.com/itchyny/lightline.vim
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             ['gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head',
-      \   'filename': 'LightlineFilename'
-      \ },
-      \ }
-
-" https://github.com/itchyny/lightline.vim/issues/293
-" this configuration requires vim-fugitive plugin
-function! LightlineFilename()
-  let root = fnamemodify(get(b:, 'git_dir'), ':h')
-  let path = expand('%:p')
-  if path[:len(root)-1] ==# root
-    return path[len(root)+1:]
-  endif
-  return expand('%')
-endfunction
-
