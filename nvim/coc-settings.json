@@ -1,6 +1,5 @@
 {
   "suggest.echodocSupport": true,
-  "suggest.maxCompleteItemCount": 20,
   "eslint.filetypes": [
     "javascript",
     "typescript",
@@ -24,7 +23,10 @@
     "scss": "css",
     "sass": "css"
   },
-  "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
+  "emmet.showExpandedAbbreviation": "always",
   "java.home": "/usr/lib/jvm/java-11-openjdk-amd64",
-  "java.maven.downloadSources": true
+  "java.maven.downloadSources": true,
+  "json.format.enable": true,
+  "java.autobuild.enabled": true,
+  "java.jdt.ls.vmargs": "-javaagent:/home/paulo/myjava/lombok.jar"
 }
