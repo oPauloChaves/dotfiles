@@ -4,6 +4,7 @@
 
 name: project
 root: ~/my/project
+pre_window: nvm use
 
 windows:
   - editor:
