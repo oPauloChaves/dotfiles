@@ -116,27 +116,25 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export EDITOR=vi
-
 source $HOME/code/iwork/lucidity/config/alias.zsh
 source $HOME/code/iwork/zsh/alias.zsh
 
 # [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
 
-# Run `nvm` init script on demand to avoid constant slow downs
-function nvm {
-  if [ -z ${NVM_DIR+x} ]; then
-    export NVM_DIR="$HOME/.nvm"
+# original by: www.growingwiththeweb.com/2018/01/slow-nvm-init.html
+# fork: https://gist.github.com/oPauloChaves/ab12cbf568e10a1fdae906550ce0f5fa
+if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -t __init_nvm)" = function ]; then
+  export NVM_DIR="$HOME/.nvm"
 
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-    nvm "$@"
-  fi
-}
-
-if [ -f "/usr/bin/npm" ]; then
-  export NPM_CONFIG_PREFIX="~/.npm-global"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'webpack')
+  function __init_nvm() {
+    for i in "${__node_commands[@]}"; do unalias $i; done
+    . "$NVM_DIR"/nvm.sh
+    unset __node_commands
+    unset -f __init_nvm
+  }
+  for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
 fi
 
 if [ -d "/usr/local/go" ]; then

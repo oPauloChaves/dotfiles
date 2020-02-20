@@ -105,31 +105,34 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zshconfig="vim ~/.zshrc"
 
-# Run `nvm` init script on demand to avoid constant slow downs
-function nvm {
-  if [ -z ${NVM_DIR+x} ]; then
-    export NVM_DIR="$HOME/.nvm"
+# TODO: move functions to another file
+# from https://unix.stackexchange.com/a/291611
+# string manipulation: http://www.tldp.org/LDP/abs/html/string-manipulation.html
+# function path_remove {
+#   # Delete path by parts so we can never accidentally remove sub paths
+#   PATH=${PATH//":$1:"/":"} # delete any instances in the middle
+#   PATH=${PATH/#"$1:"/} # delete any instance at the beginning
+#   PATH=${PATH/%":$1"/} # delete any instance in the at the end
+# }
 
-	if [[ -v NPM_CONFIG_PREFIX ]]; then
-		unset NPM_CONFIG_PREFIX
-	fi
+# original by: www.growingwiththeweb.com/2018/01/slow-nvm-init.html
+# fork: https://gist.github.com/oPauloChaves/ab12cbf568e10a1fdae906550ce0f5fa
+if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -f __init_nvm)" = function ]; then
+  export NVM_DIR="$HOME/.nvm"
 
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-    nvm "$@"
-  fi
-}
-
-# system's npm
-# Fix permissions: https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
-if [ -f "/usr/bin/npm" ]; then
-  export NPM_CONFIG_PREFIX="~/.npm-global"
-  export PATH=~/.npm-global/bin:$PATH
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'webpack')
+  function __init_nvm() {
+    for i in "${__node_commands[@]}"; do unalias $i; done
+    . "$NVM_DIR"/nvm.sh
+    unset __node_commands
+    unset -f __init_nvm
+  }
+  for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
 fi
 
 
-# https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/
+# https://browntr elabs.com/base-16-shell-and-why-its-so-awsome/
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
@@ -163,6 +166,3 @@ bindkey '^X' autosuggest-execute
 bindkey "^P" history-substring-search-up # Ctrl + p
 bindkey "^N" history-substring-search-down # Ctrl + n
 
-if [ -d "$HOME/tools" ]; then
-  source $HOME/tools/alias.zsh
-fi

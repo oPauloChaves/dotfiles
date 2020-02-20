@@ -15,3 +15,5 @@ alias q='exit'
 # Disk utility aliases
 alias df='df -h'
 alias du='du -h'
+
+alias mux=tmuxinator
