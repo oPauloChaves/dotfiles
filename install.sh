@@ -20,3 +20,5 @@ sh $MY_PATH/config-zsh.sh
 
 [ -f ~/.bashrc ] && [ ! -f ~/.old-bashrc ] && mv ~/.bashrc ~/.old-bashrc
 [ ! -L ~/.bashrc ] && ln -s "$MY_PATH/.bashrc" ~/.bashrc
+
+echo "Done!"
