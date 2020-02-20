@@ -1,0 +1,18 @@
+# /home/paulo/.config/tmuxinator/trolley.yml
+
+# to get layout dimensions, open tmux, open panel, resize as you wish, then run `tmux list-windown`, then just copy
+
+name: project
+root: ~/my/project
+
+windows:
+  - editor:
+      layout: c1ec,211x51,0,0{135x51,0,0,0,75x51,136,0,2}
+      panes:
+        - vim
+        - git status
+  - server:
+      layout: 56fe,211x51,0,0{105x51,0,0,1,105x51,106,0,3}
+      panes:
+        - npm start
+        -
