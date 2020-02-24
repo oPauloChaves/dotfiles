@@ -68,22 +68,6 @@ let mapleader = ','
 " Map : to ; (to avoid using SHIFT)
 nnoremap ; :
 
-" shortcut to save
-noremap <leader>w :w<CR>
-
-"" Buffer navigation
-noremap <leader>z :bp<CR>
-noremap <leader>x :bn<CR>
-noremap <leader>d :bd<CR>
-" Quick toggle between buffers
-noremap <leader>j :b#<CR>
-
-"" Switching windows
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-noremap <C-h> <C-w>h
-
 "" Clean search (highlight)
 nnoremap <silent> <leader><space> :noh<cr>
 
