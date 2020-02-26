@@ -166,3 +166,13 @@ bindkey '^X' autosuggest-execute
 bindkey "^P" history-substring-search-up # Ctrl + p
 bindkey "^N" history-substring-search-down # Ctrl + n
 
+if grep -q microsoft /proc/version; then
+  # https://github.com/Microsoft/WSL/issues/3183#issuecomment-583354795
+  if ! pgrep ssh-agent > /dev/null; then
+    rm -f /tmp/ssh-auth-sock
+    eval "$(ssh-agent -s -a /tmp/ssh-auth-sock)"
+    ssh-add
+  else
+    export SSH_AUTH_SOCK=/tmp/ssh-auth-sock
+  fi
+fi
