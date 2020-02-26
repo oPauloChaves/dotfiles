@@ -38,10 +38,14 @@ endif
 " Allow backspace to work on all characters (not just insert mode)
 set backspace=indent,eol,start
 
-"" Copy/Paste/Cut
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
+" Copy/Paste/Cut
+" WSL support: https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
+"
+" Actually neovim looks for win32yank.exe executable for handling clipboard so
+" we only need symlink that so that it can be accessed on linux
+" see: https://github.com/neovim/neovim/blob/master/runtime/autoload/provider/clipboard.vim#L115
+" sudo ln -s "/mnt/c/path/to/win32yank.exe" "/usr/local/bin/win32yank.exe"
+set clipboard=unnamedplus
 
 noremap YY "+y<CR>
 noremap <leader>p "+gP<CR>
