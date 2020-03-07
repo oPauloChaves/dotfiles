@@ -139,6 +139,7 @@ noremap { {zzzv
 
 """ Colors
 syntax on
+set termguicolors
 
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
