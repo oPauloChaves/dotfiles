@@ -1,16 +1,3 @@
-" Default shell
-set shell=/bin/zsh
-scriptencoding utf-8
-
-" #######
-" Bundles
-" #######
-if &compatible
-  set nocompatible
-endif
-
-filetype off
-
 " ensure vim-plug is installed and then load it
 call functions#PlugLoad()
 call plug#begin('~/.vim/plugged')
@@ -18,34 +5,17 @@ call plug#begin('~/.vim/plugged')
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-fugitive'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'npm install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json'] }
-Plug 'w0rp/ale'
-Plug 'tpope/vim-endwise'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx', 'eruby' ]}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'jiangmiao/auto-pairs'
-Plug 'wincent/ferret'
 Plug 'sheerun/vim-polyglot'
-Plug '/usb/bin/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'SirVer/ultisnips'
+Plug 'itchyny/lightline.vim'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
-Plug 'itchyny/lightline.vim'
-
-Plug 'chriskempson/base16-vim', {'do': 'git checkout dict_fix'}
-
-" https://github.com/Valloric/YouCompleteMe/issues/1751
-" install cmake first
-function! BuildYCM(info)
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --ts-completer
-  endif
-endfunction
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+Plug 'chriskempson/base16-vim'
+Plug 'janko/vim-test'
 
 call plug#end()
 
@@ -53,23 +23,37 @@ filetype plugin indent on
 
 set history=1000 " change history to 1000
 
-"" Directories for swap files
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off, since most stuff is in SVN, git etc. anyway...
 set nobackup
+set nowb
 set noswapfile
 
-if exists('&inccommand')
+if (has('nvim'))
   " show results of substition as they're happening
   " but don't open a split
-  set inccommand=split
+  set inccommand=nosplit
 endif
 
 " Allow backspace to work on all characters (not just insert mode)
 set backspace=indent,eol,start
 
-"" Copy/Paste/Cut
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
+" Copy/Paste/Cut
+" WSL support: https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
+"
+" Actually neovim looks for win32yank.exe executable for handling clipboard so
+" we only need symlink that so that it can be accessed on linux
+" see: https://github.com/neovim/neovim/blob/master/runtime/autoload/provider/clipboard.vim#L115
+" sudo ln -s "/mnt/c/path/to/win32yank.exe" "/usr/local/bin/win32yank.exe"
+set clipboard=unnamedplus
 
 noremap YY "+y<CR>
 noremap <leader>p "+gP<CR>
@@ -81,62 +65,53 @@ set mouse=a
 " Searching
 set ignorecase
 set smartcase
-set magic                            " Set magic on, for regex
-set hlsearch                         " highlight search results
-set incsearch                        " set incremental search, like modern browsers
+set magic             " Set magic on, for regex
+set hlsearch          " highlight search results
+set incsearch         " set incremental search, like modern browsers
 
 " Don’t break lines
 set textwidth=0
 set nowrap
-set number                " show line numbers
-set autoindent            " automatically set indent of new line
-set hidden                " current buffer can be put into background
-set scrolloff=5           " lines of text around cursor
-set showmatch             " show matching braces
+set number            " show line numbers
+set autoindent        " automatically set indent of new line
+set hidden            " current buffer can be put into background
+set scrolloff=5       " lines of text around cursor
+set showmatch         " show matching braces
 
 " Tab control
-set noexpandtab " insert tabs rather than spaces for <Tab>
-set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
-set tabstop=4 " the visible width of tabs
-set softtabstop=4 " edit as if the tabs are 4 characters wide
-set shiftwidth=4 " number of spaces to use for indent and unindent
-set shiftround " round indent to a multiple of 'shiftwidth'
-
-" Folding
-set foldmethod=syntax
-set foldnestmax=10
-set nofoldenable
-set foldlevel=2
+set expandtab         " convert tabs to spaces
+set smarttab          " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
+set tabstop=4         " the visible width of tabs
+set softtabstop=4     " edit as if the tabs are 4 characters wide
+set shiftwidth=4      " number of spaces to use for indent and unindent
+set shiftround        " round indent to a multiple of 'shiftwidth'
 
 " Highlight line with cursor
 set cursorline
-:hi CursorLine   cterm=NONE ctermbg=236 ctermfg=none
 
-" Visual autocomplete for command menu (e.g. :e ~/path/to/file)
-" partially lifted from http://stackoverflow.com/a/15583861/4921402
-set wildmenu
-set wildmode=list:longest,list:full
-set wildignore+=*/.hg/*,*/.git/*.,*/.DS_Store,*/.idea/*,*/.tmp/*,*/target/*
+" Don’t syntax highlight lines longer than 300 characters
+set synmaxcol=300
 
-" Don’t syntax highlight lines longer than 800 characters
-set synmaxcol=400
+let g:netrw_banner = 0
 
 " General Mappings {{{
 " set a map leader for more key combos
 let mapleader = ','
 
-let g:netrw_banner = 0
-
 " Map : to ; (to avoid using SHIFT)
 nnoremap ; :
 
 " shortcut to save
-nmap <leader>w :w<cr>
+noremap <leader>w :w<CR>
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
 "" Buffer navigation
 noremap <leader>z :bp<CR>
 noremap <leader>x :bn<CR>
-noremap <leader>c :bd<CR>
+noremap <leader>d :bd<CR>
 " Quick toggle between buffers
 noremap <leader>j :b#<CR>
 
@@ -164,8 +139,8 @@ noremap <Leader>h :split<CR>
 noremap <Leader>v :vsplit<CR>
 
 " Quickly open/reload vim
-nnoremap <leader>ev :e! ~/.vimrc<CR>
-nnoremap <leader>er :source ~/.vimrc<CR>
+nnoremap <leader>ev :e! ~/.config/nvim/init.vim<CR>
+nnoremap <leader>er :source ~/.config/nvim/init.vim<CR>
 
 """ Keep the window centered
 noremap G Gzzzv
@@ -174,65 +149,64 @@ noremap N Nzzzv
 noremap } }zzzv
 noremap { {zzzv
 
-" }}} General Mappings
 
-""" Colors
-syntax on
-set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
+syntax enable
+
+" Enable 256 colors palette in Gnome Terminal
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256
+endif
+
+" try
+"     colorscheme onedark
+" catch
+" endtry
 
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
 
-""" Remove unwanted whitespace when saving
-autocmd BufWritePre * silent! %s/\s\+$//e
+" set background=dark
 
-""" Remember cursor position
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set guioptions-=T
+    set guioptions-=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+
+" Return to last edit position when opening files (You want this!)
 augroup vimrc-remember-cursor-position
   autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
+""" Coc config
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ 'coc-emmet',
+  \ 'coc-java',
+  \ ]
+
+" Setup `Prettier` command
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+nmap <silent> <leader>p :Prettier<cr>
+
 """ NERDTree
 nmap <silent> <leader>k :NERDTreeToggle<cr>
 nmap <silent> <leader>y :NERDTreeFind<cr>
 let NERDTreeShowHidden=1
-
-""" vim-fugitive
-nmap <silent><leader>gs :Gstatus<cr>
-nmap <silent><leader>gb :Gblame<cr>
-
-""" ALE
-let g:ale_change_sign_column_color = 0
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
-let g:ale_set_highlights = 0
-
-let g:ale_linters = {
-\ 'javascript': ['eslint'],
-\ 'ruby': ['rubocop'],
-\ 'html': [],
-\ 'java': []
-\}
-
-
-""" Prettier
-let g:prettier#exec_cmd_async = 1
-let g:prettier#autoformat = 0
-nnoremap <Leader>p :Prettier<CR>
-
-""" JSON
-let g:vim_json_syntax_conceal = 0
-
-""" emmet
-let g:user_emmet_settings = {
-\  'javascript.jsx': {
-\    'extends': 'jsx',
-\  },
-\}
-let g:user_emmet_leader_key='<C-E>'
 
 """ FZF
 let g:fzf_layout = { 'down': '~25%' }
@@ -243,31 +217,39 @@ else
   nmap <silent> <leader>f :FZF<cr>
 endif
 
+" Rg current word
+nnoremap <silent> <Leader>rr :Rg <C-R><C-W><CR>
+
 nmap <silent> <leader>b :Buffers<cr>
 
-""" UltiSnips
-let g:UltiSnipsExpandTrigger="<c-j>"
-
-""" Go
-" nmap <silent> <leader>ip :GoImports<cr>
-
-""" YCM
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_filetype_specific_completion_to_disable = {
-\ 'ruby': 1
-\}
-
-""" vim-polyglot
-let g:polyglot_disabled = ['ruby']
-
-""" lightline
+" Add diagnostic info for https://github.com/itchyny/lightline.vim
 let g:lightline = {
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-  \ },
-  \ 'component_function': {
-  \   'gitbranch': 'fugitive#head'
-  \ },
-  \ }
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             ['gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head',
+      \   'filename': 'LightlineFilename'
+      \ },
+      \ }
+
+" https://github.com/itchyny/lightline.vim/issues/293
+" this configuration requires vim-fugitive plugin
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+
+""" vim-test
+" these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
