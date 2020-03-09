@@ -2,3 +2,5 @@
 
 nvim/autoload/plug.vim
 nvim/.netrwhist
+vim/autoload/plug.vim
+
