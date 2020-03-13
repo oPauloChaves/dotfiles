@@ -39,5 +39,6 @@ noremap <Leader>v :vsplit<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-nnoremap <silent> <leader>f :<C-u>call VSCodeNotify('workbench.view.explorer')<CR>
+nnoremap <silent> <leader>f :<C-u>call VSCodeNotify('editor.action.formatDocument')<CR>
+nnoremap <silent> <leader>k :<C-u>call VSCodeNotify('workbench.view.explorer')<CR>
 nnoremap <silent> <C-k> :<C-u>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<CR>
