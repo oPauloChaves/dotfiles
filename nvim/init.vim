@@ -17,7 +17,6 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
 Plug 'chriskempson/base16-vim'
-Plug 'janko/vim-test'
 
 call plug#end()
 
@@ -29,11 +28,9 @@ set history=1000 " change history to 1000
 set nobackup
 set noswapfile
 
-if (has('nvim'))
-  " show results of substition as they're happening
-  " but don't open a split
-  set inccommand=nosplit
-endif
+" show results of substition as they're happening
+" but don't open a split
+set inccommand=nosplit
 
 " Allow backspace to work on all characters (not just insert mode)
 set backspace=indent,eol,start
@@ -210,10 +207,3 @@ function! LightlineFilename()
   return expand('%')
 endfunction
 
-""" vim-test
-" these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
-nmap <silent> t<C-n> :TestNearest<CR>
-nmap <silent> t<C-f> :TestFile<CR>
-nmap <silent> t<C-s> :TestSuite<CR>
-nmap <silent> t<C-l> :TestLast<CR>
-nmap <silent> t<C-g> :TestVisit<CR>
