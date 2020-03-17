@@ -86,13 +86,6 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -166,18 +159,30 @@ bindkey '^X' autosuggest-execute
 bindkey "^P" history-substring-search-up # Ctrl + p
 bindkey "^N" history-substring-search-down # Ctrl + n
 
-if grep -q microsoft /proc/version; then
-  # its presence caused sharp faild to build, cuz the script that installs libvips was using it instead
-  # of the npm config dir on linux (happened on WSL using wsltty terminal)
-  unset APPDATA
+# its presence caused sharp faild to build, cuz the script that installs libvips was using it instead
+# of the npm config dir on linux (happened on WSL using wsltty terminal)
+unset APPDATA
 
-  # https://github.com/Microsoft/WSL/issues/3183#issuecomment-583354795
-  if ! pgrep ssh-agent > /dev/null; then
-    rm -f /tmp/ssh-auth-sock
-    eval "$(ssh-agent -s -a /tmp/ssh-auth-sock)"
-    ssh-add
-  else
-    export SSH_AUTH_SOCK=/tmp/ssh-auth-sock
-  fi
-fi
+## not working
+# if grep -q microsoft /proc/version; then
+#   # https://github.com/Microsoft/WSL/issues/3183#issuecomment-583354795
+#   if ! pgrep ssh-agent > /dev/null; then
+#     rm -f /tmp/ssh-auth-sock
+#     eval "$(ssh-agent -s -a /tmp/ssh-auth-sock)"
+#     ssh-add
+#   else
+#     export SSH_AUTH_SOCK=/tmp/ssh-auth-sock
+#   fi
+# fi
 
+# export DISPLAY=192.168.0.142:0
+
+# Android dev & Flutter
+# if [ -d "$HOME/flutter" ]; then
+#   export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+#   export ANDROID_HOME="$HOME/Android/Sdk"
+#   export PATH="$JAVA_HOME/bin:$HOME/flutter/bin:$PATH"
+#   export PATH=$ANDROID_HOME/cmdline-tools/latest:$PATH
+#   export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+#   export PATH=$ANDROID_HOME/platform-tools:$PATH
+# fi
