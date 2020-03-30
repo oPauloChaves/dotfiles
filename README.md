@@ -6,7 +6,13 @@ Most config is from here: https://github.com/nicknisi/dotfiles
 
 - tmux
 - neovim
-  - [YouCompleteMe on Fedora](https://github.com/Valloric/YouCompleteMe#fedora-linux-x64)
+
+  - Install coc extensions with
+
+    ```bash
+    vim -c 'CocInstall -sync coc-snippets coc-pairs coc-tsserver coc-eslint coc-prettier coc-json coc-emmet coc-java|q'
+    ```
+
 - pip, pip3
 - neovim (for pip and pip3)
 - zsh
@@ -17,7 +23,6 @@ Most config is from here: https://github.com/nicknisi/dotfiles
 - fzf
 - nvm
 - rvm
-
 
 ### Then run:
 
@@ -57,7 +62,6 @@ Using a [plugin](https://github.com/robbyrussell/oh-my-zsh#using-oh-my-zsh) with
 ### Sublime Text
 
 [linux repositories](https://www.sublimetext.com/docs/3/linux_repositories.html)
-
 
 ## TODO
 

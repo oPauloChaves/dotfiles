@@ -13,10 +13,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
 Plug 'chriskempson/base16-vim'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 call plug#end()
 
@@ -148,19 +148,7 @@ augroup vimrc-remember-cursor-position
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
-""" Coc config
-let g:coc_global_extensions = [
-  \ 'coc-snippets',
-  \ 'coc-pairs',
-  \ 'coc-tsserver',
-  \ 'coc-eslint',
-  \ 'coc-prettier',
-  \ 'coc-json',
-  \ 'coc-emmet',
-  \ 'coc-java',
-  \ ]
-
-" Setup `Prettier` command
+" Setup coc-prettier `Prettier` command
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 nmap <silent> <leader>p :Prettier<cr>
 
