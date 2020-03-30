@@ -1,8 +1,17 @@
-Copy this to ~/.config/dotfiles
-
-Most config is from here: https://github.com/nicknisi/dotfiles
+# Paulo Chaves - Dotfiles
 
 ### Install
+
+### TODO
+
+- [ ] Write a meaningful README
+  - [ ] Add requirements and how to install it
+  - [ ] Brief description about each plugin used with neovim
+  - [ ] List all alias and where they can be defined
+- [ ] Create a better installation script that work on Ubuntu and WSL
+
+
+-----------------------
 
 - tmux
 - neovim
