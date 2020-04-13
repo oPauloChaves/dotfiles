@@ -12,7 +12,7 @@ sh $MY_PATH/config-zsh.sh
 
 # Neovim
 [ -d ~/.config/nvim ] && [ ! -d ~/.config/old-nvim ] && mv ~/.config/nvim ~/.config/old-nvim
-[ ! -L ~/.config/nvim ] && ln -s "$(pwd)/nvim" ~/.config/nvim
+[ ! -L ~/.config/nvim ] && ln -s "$MY_PATH/nvim" ~/.config/nvim
 
 # TMUX
 [ -f ~/.tmux.conf ] && [ ! -f ~/.old-tmux.conf ] && mv ~/.tmux.conf ~/.old-tmux.conf

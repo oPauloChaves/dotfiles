@@ -102,3 +102,6 @@ fi
 #   export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
 #   export PATH=$ANDROID_HOME/platform-tools:$PATH
 # fi
+
+# for signing git commits
+export GPG_TTY=$(tty)

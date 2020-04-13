@@ -116,9 +116,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-source $HOME/code/iwork/lucidity/config/alias.zsh
-source $HOME/code/iwork/zsh/alias.zsh
-
 # [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
 
 # original by: www.growingwiththeweb.com/2018/01/slow-nvm-init.html
