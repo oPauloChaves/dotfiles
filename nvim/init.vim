@@ -39,7 +39,7 @@ set backspace=indent,eol,start
 " WSL support: https://github.com/neovim/neovim/wiki/FAQ#how-to-use-the-windows-clipboard-from-wsl
 "
 " Actually neovim looks for win32yank.exe executable for handling clipboard so
-" we only need symlink that so that it can be accessed on linux
+" we only need to symlink that so that it can be accessed on linux
 " see: https://github.com/neovim/neovim/blob/master/runtime/autoload/provider/clipboard.vim#L115
 " sudo ln -s "/mnt/c/path/to/win32yank.exe" "/usr/local/bin/win32yank.exe"
 set clipboard=unnamedplus
