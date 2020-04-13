@@ -17,8 +17,11 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  node
+  npm
   docker
   docker-compose
+  ssh-agent
   zsh-autosuggestions
   zsh-syntax-highlighting
   history-substring-search
