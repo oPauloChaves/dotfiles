@@ -21,8 +21,6 @@ plugins=(
   npm
   docker
   docker-compose
-  ssh-agent
-  gpg-agent
   zsh-autosuggestions
   zsh-syntax-highlighting
   history-substring-search
