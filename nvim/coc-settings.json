@@ -10,6 +10,7 @@
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
+  "coc.preferences.extensionUpdateCheck": "never",
   "javascript.suggestionActions.enabled": false,
   "snippets.extends": {
     "cpp": ["c"],
