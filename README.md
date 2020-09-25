@@ -64,6 +64,10 @@ $ curl -L https://raw.githubusercontent.com/docker/compose/1.20.1/contrib/comple
 
 ```sh
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
 ```
 
 Using a [plugin](https://github.com/robbyrussell/oh-my-zsh#using-oh-my-zsh) within oh-my-zsh

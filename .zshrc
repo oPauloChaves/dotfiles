@@ -107,7 +107,7 @@ fi
 
 ### npm global config
 ### https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
-NPM_PACKAGES="${HOME}/.npm"
+NPM_PACKAGES="${HOME}/.npm-global"
 export PATH="$PATH:$NPM_PACKAGES/bin"
 
 # Preserve MANPATH if you already defined it somewhere in your config.
