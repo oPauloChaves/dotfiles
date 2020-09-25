@@ -43,7 +43,7 @@ alias zshconfig="vim ~/.zshrc"
 # fork: https://gist.github.com/oPauloChaves/ab12cbf568e10a1fdae906550ce0f5fa
 # if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -f __init_nvm)" = function ]; then
 #   export NVM_DIR="$HOME/.nvm"
-# 
+#
 #   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
 #   declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'webpack', 'serve')
 #   function __init_nvm() {
@@ -113,3 +113,18 @@ export PATH="$PATH:$NPM_PACKAGES/bin"
 # Preserve MANPATH if you already defined it somewhere in your config.
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+
+if grep -q microsoft /proc/version; then
+  export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+  export GDK_SCALE=1
+  export LIBGL_ALWAYS_INDIRECT=1
+
+  if ! pgrep ssh-agent > /dev/null; then
+    rm -f /tmp/ssh-auth-sock
+    eval "$(ssh-agent -s -a /tmp/ssh-auth-sock)"
+  fi
+  export SSH_AUTH_SOCK=/tmp/ssh-auth-sock
+  if ! ssh-add -l; then
+    ssh-add
+  fi
+fi
