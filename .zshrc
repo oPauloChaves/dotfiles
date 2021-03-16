@@ -37,7 +37,7 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias zshconfig="vim ~/.zshrc"
+alias zshrc="vim ~/.zshrc"
 
 # original by: www.growingwiththeweb.com/2018/01/slow-nvm-init.html
 # fork: https://gist.github.com/oPauloChaves/ab12cbf568e10a1fdae906550ce0f5fa
@@ -55,6 +55,8 @@ alias zshconfig="vim ~/.zshrc"
 #   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
 # fi
 
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # https://browntr elabs.com/base-16-shell-and-why-its-so-awsome/
 BASE16_SHELL=$HOME/.config/base16-shell/
@@ -107,12 +109,12 @@ fi
 
 ### npm global config
 ### https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
-NPM_PACKAGES="${HOME}/.npm-global"
-export PATH="$PATH:$NPM_PACKAGES/bin"
+# NPM_PACKAGES="${HOME}/.npm-global"
+# export PATH="$PATH:$NPM_PACKAGES/bin"
 
 # Preserve MANPATH if you already defined it somewhere in your config.
 # Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
-export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
+# export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 if grep -q microsoft /proc/version; then
   export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
